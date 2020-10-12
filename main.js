@@ -1,9 +1,10 @@
-// number bigint string boolean null undefined
+// let p = Promise.resolve(new Error('foo'))
+
+// setTimeout(console.log, 0, p)
 
 
+// setTimeout(console.log, 0, Promise.reject(Promise.resolve()));
 
-try {
-  Promise.reject(new Error('bar'))
-} catch (e) {
-  console.log(e, 'zheli de e');
-}
+let p1 = Promise.resolve(1)
+
+p1.then('hello')
