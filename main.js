@@ -1,7 +1,17 @@
-let global = Symbol.for('name')
-let global1 = Symbol.for('name')
-let local = Symbol('name')
-
-console.log(global == global1);
-
-console.log(Symbol.keyFor(global));
+var getMinimumDifference = function (root) {
+  let ans = Number.MAX_SAFE_INTEGER,
+    pre = -1;
+  dfs(root);
+  return ans;
+  function dfs(root) {
+    if (!root) return;
+    dfs(root.left);
+    if (pre == -1) {
+      pre = root.val;
+    } else {
+      ans = Math.min(ans, root.val - pre);
+      pre = root.val;
+    }
+    dfs(root.right);
+  }
+};
