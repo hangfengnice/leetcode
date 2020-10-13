@@ -4,4 +4,4 @@
 
 ## top100
 
-## lcof( 剑指offer )
+## 剑指offer
