@@ -1,22 +1,19 @@
-var connect = function (root) {
-  if (!root) return null;
-  let queue = [root];
-
-  while (queue.length) {
-    let size = queue.length;
-    for (let i = 0; i < size; i++) {
-      const node = queue.shift();
-
-      if (i < size - 1) {
-        node.next = queue[0];
+var checkPossibility = function (nums) {
+  let len = nums.length;
+  for (let i = len - 1; i > 0; i--) {
+    let count = 0,
+      j = i;
+    while (j > 0) {
+      if (nums[i] < nums[j - 1]) {
+        count++;
       }
-      if (node.left) {
-        queue.push(node.left);
-      }
-      if (node.right) {
-        queue.push(node.right);
-      }
+      if (count == 2) return false;
+      j--;
     }
   }
-  return root
+  return true;
 };
+
+let result = checkPossibility([3,4,2,3])
+
+console.log(result);
