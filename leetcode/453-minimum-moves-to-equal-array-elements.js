@@ -1,0 +1,3 @@
+var minMoves = function(nums) {
+
+};
