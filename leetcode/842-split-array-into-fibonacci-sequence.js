@@ -1,0 +1,3 @@
+var splitIntoFibonacci = function(S) {
+
+};
