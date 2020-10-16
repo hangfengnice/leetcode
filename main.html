@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var lengthOfLIS = function (nums) {
+        debugger;
+        let n = nums.length;
+        if (n < 2) return n;
+
+        let tail = Array(n);
+        tail[0] = nums[0];
+        let end = 0;
+
+        for (let i = 1; i < n; i++) {
+          if (nums[i] > tail[end]) {
+            end++;
+            tail[end] = nums[i];
+          } else {
+            let left = 0;
+            let right = end;
+            while (left < right) {
+              let mid = left + ((right - left) >>> 1);
+              if (tail[mid] < nums[i]) {
+                left = mid + 1;
+              } else {
+                right = mid;
+              }
+            }
+            tail[left] = nums[i];
+          }
+        }
+        return ++end;
+      };
+
+      let result = lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]);
+
+      console.log(result);
+    </script>
+  </body>
+</html>
