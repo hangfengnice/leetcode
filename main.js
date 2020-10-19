@@ -1,16 +1,21 @@
-var maxLengthBetweenEqualCharacters = function (s) {
-  let max = -1
-  for(let i = 0; i < s.length - 1; i ++) {
-    for(let j = i + 1; j < s.length; j ++) {
-      if (s[i] == s[j]) {
-        let len = j - i - 1
-        if (len > max) max = len
-      }
+var backspaceCompare = function (S, T) {
+  s = S.split("");
+  t = T.split("");
+  let s1 = [],
+    t1 = [];
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] != "#") {
+      s1.push(s[i]);
+    } else if (s1.length) {
+      s1.pop();
     }
   }
-  return max
+  for (let i = 0; i < t.length; i++) {
+    if (t[i] != "#") {
+      t1.push(t[i]);
+    } else if (t1.length) {
+      t1.pop();
+    }
+  }
+  return s1.join("") == t1.join("");
 };
-
-let result = maxLengthBetweenEqualCharacters("aa")
-
-console.log(result);
