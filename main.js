@@ -1,21 +1,28 @@
-var backspaceCompare = function (S, T) {
-  s = S.split("");
-  t = T.split("");
-  let s1 = [],
-    t1 = [];
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] != "#") {
-      s1.push(s[i]);
-    } else if (s1.length) {
-      s1.pop();
+var findKthLargest = function (nums, k) {
+  let len = nums.length;
+  let l = 0,
+    r = len - 1;
+  let target = len - k;
+  while (true) {
+    let index = partition(nums, l, r);
+    if (index == target) {
+      return nums[index];
+    } else if (index < target) {
+      l = index + 1;
+    } else {
+      r = index - 1;
     }
   }
-  for (let i = 0; i < t.length; i++) {
-    if (t[i] != "#") {
-      t1.push(t[i]);
-    } else if (t1.length) {
-      t1.pop();
+  function partition(nums, l, r) {
+    let pivot = nums[l];
+    let j = l;
+    for (let i = l + 1; i <= r; i++) {
+      if (nums[i] < pivot) {
+        j++;
+        if (j != i) [nums[j], nums[i]] = [nums[i], nums[j]];
+      }
     }
+    [nums[j], nums[l]] = [nums[l], nums[j]];
+    return j;
   }
-  return s1.join("") == t1.join("");
 };
