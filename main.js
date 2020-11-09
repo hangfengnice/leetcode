@@ -1,16 +1,16 @@
-var triangle = function (rowIndex) {
-  let cur = [1]
-  for(let i = 1; i <= rowIndex; i ++) {
-    for(let j = i - 1; j > 0; j --) {
-      cur[j] = cur[j] + cur[j - 1]
-    }
-    cur[i] = 1
+var best = function (prices) {
+  let len = prices.length;
+  if (len < 2) return 0;
+  let precash = 0;
+  let prehold = -prices[0];
+  for (let i = 0; i < len; i++) {
+    let cash = Math.max(precash, prehold + prices[i]);
+    let hold = Math.max(prehold, precash - prices[i]);
+    precash = cash;
+    prehold = hold;
   }
-  return cur
-}
+  return precash;
+};
+let res = best([7,1,5,3,6,4])
 
-let res = triangle(4)
-let res1 = triangle(5)
-
-console.log(res)
-console.log(res1);
+console.log(res);
