@@ -1,16 +1,26 @@
-var best = function (prices) {
-  let len = prices.length;
-  if (len < 2) return 0;
-  let precash = 0;
-  let prehold = -prices[0];
-  for (let i = 0; i < len; i++) {
-    let cash = Math.max(precash, prehold + prices[i]);
-    let hold = Math.max(prehold, precash - prices[i]);
-    precash = cash;
-    prehold = hold;
-  }
-  return precash;
-};
-let res = best([7,1,5,3,6,4])
+var removeKdigits = function (num, k) {
+  let stack = [];
 
-console.log(res);
+  for (let digit of num) {
+    while (stack.length && stack[stack.length - 1] > digit && k) {
+      stack.pop();
+      k--;
+    }
+    stack.push(digit);
+  }
+  for(; k > 0; k --) {
+    stack.pop()
+  }
+  let zero = true;
+  let ans = "";
+  for (let digit of stack) {
+    if (zero && digit == "0") continue;
+    zero = false;
+    ans += digit;
+  }
+  return !ans ? "0" : ans;
+};
+
+let result = removeKdigits('9', 1)
+
+console.log(result);
