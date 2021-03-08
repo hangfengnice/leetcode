@@ -50,3 +50,17 @@ var frequencySort = function (s) {
 let result = frequencySort("loveleetcode");
 
 console.log(result);
+
+var frequencySort = function (s) {
+  let m = {};
+  for (let key of s) {
+    m[key] = m[key] != undefined ? map[key] + 1 : 1;
+  }
+  let keys = Object.keys(m).sort((a, b) => b - a);
+
+  let res = "";
+  for (let key of keys) {
+    res += key.repeat(m[key]);
+  }
+  return res;
+};
