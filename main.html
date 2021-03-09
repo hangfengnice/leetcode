@@ -5,9 +5,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .div {
+      width: 300px;
+      height: 300px;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      background-color: lightblue;
+      grid-template-columns: 80px auto 100px;
+     grid-template-rows: 25% 100px auto 60px;
+    }
+  </style>
 </head>
 <body>
   helo
-  <script src="./leetcode/290.js"></script>
+  <div class="div">
+    clas
+  </div>
+
+  <script>
+    let style = getComputedStyle(document.querySelector('.div'))
+    console.log(style.height)
+
+    let div = document.querySelector('.div')
+
+
+    div.getBoundingClientRect()
+
+  </script>
 </body>
 </html>
