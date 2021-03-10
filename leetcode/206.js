@@ -9,3 +9,14 @@ var reverseList = function(head) {
   }
   return prev
 };
+
+
+1 -> 2 -> 3
+
+var reverseList = function(head) {
+  if (!head || !head.next) return head
+  let newHead = reverseList(head.next)
+  head.next.next = head
+  head.next = null
+  return newHead
+};
