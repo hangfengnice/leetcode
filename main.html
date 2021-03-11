@@ -15,6 +15,11 @@
       background-color: lightblue;
       grid-template-columns: 80px auto 100px;
      grid-template-rows: 25% 100px auto 60px;
+     background-image: linear-gradient(to right, #6799e2, #6170ca, #2f59ad);
+    }
+    .cs-sanfei-btn {
+      border-radius: 6px;
+      background-color: purple;
     }
   </style>
 </head>
@@ -23,16 +28,8 @@
   <div class="div">
     clas
   </div>
+  <span class="cs-sanfei-btn">三费订单</span>
 
-  <script>
-    let style = getComputedStyle(document.querySelector('.div'))
-    console.log(style.height)
-
-    let div = document.querySelector('.div')
-
-
-    div.getBoundingClientRect()
-
-  </script>
+  <script src="./main.js"></script>
 </body>
 </html>

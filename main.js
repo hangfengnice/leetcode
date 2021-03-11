@@ -1,43 +1,48 @@
-var fourSum = function (nums, target) {
-  let size = nums.length,
-    res = [];
-  if (size < 4) return res;
-  nums.sort((a, b) => a - b);
-  console.log(nums, "nums");
-
-  for (let a = 0; a < size - 3; a++) {
-    if (a > 0 && nums[a] == nums[a - 1]) continue;
-
-    for (b = a + 1; b < size - 2; b++) {
-      if (b > a + 1 && nums[b] == nums[b - 1]) continue;
-
-      let c = b + 1;
-      let d = size - 1;
-      console.log(c, d);
-
-      while (c < d) {
-        if (nums[a] + nums[b] + nums[c] + nums[d] > target) {
-          d--;
-        } else if (nums[a] + nums[b] + nums[c] + nums[d] < target) {
-          c++;
-        } else {
-          res.push([nums[a], nums[b], nums[c], nums[d]]);
-          while (c < d && nums[c + 1] == nums[c ]) {
-            c++;
+var ladderLength = function (beginWord, endWord, wordList) {
+  if (!endWord || wordList.indexOf(endWord) == -1) {
+    return 0;
+  }
+  debugger
+  // 各个通用状态对应所有单词
+  var comboDicts = {};
+  var len = beginWord.length;
+  for (var i = 0; i < wordList.length; i++) {
+    for (var r = 0; r < len; r++) {
+      var newWord =
+        wordList[i].substring(0, r) + "*" + wordList[i].substring(r + 1, len);
+      !comboDicts[newWord] && (comboDicts[newWord] = []);
+      comboDicts[newWord].push(wordList[i]);
+    }
+  }
+  // Queue for BFS
+  var queue = [[beginWord, 1]];
+  // visited
+  var visited = { beginWord: true };
+  while (queue.length > 0) {
+    var currNode = queue.shift();
+    var currWord = currNode[0];
+    var currLevel = currNode[1];
+    for (var i = 0; i < len; i++) {
+      // 通用状态
+      var newWord =
+        currWord.substring(0, i) + "*" + currWord.substring(i + 1, len);
+      if (newWord in comboDicts) {
+        var tmpWords = comboDicts[newWord];
+        for (var z = 0; z < tmpWords.length; z++) {
+          if (tmpWords[z] == endWord) {
+            return currLevel + 1;
           }
-          while (c < d && nums[d + 1] == nums[d ]) {
-            d--;
+          if (!visited[tmpWords[z]]) {
+            visited[tmpWords[z]] = true;
+            queue.push([tmpWords[z], currLevel + 1]);
           }
-          c++;
-          d--;
         }
       }
     }
   }
-  return res;
+  return 0;
 };
 
-let arr = [-3, -2, -1, 0, 0, 1, 2, 3];
-let res = fourSum(arr, 0);
+let res = ladderLength(beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"])
 
-console.log(res);
+console.log(res, 'res');
