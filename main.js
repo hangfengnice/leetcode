@@ -1,6 +1,9 @@
-let map = new Map([['helo', [1]]])
-console.log(map);
+let html = '11<123<'
 
-map.get('helo').push(2)
+let textEnd = html.indexOf('<')
+console.log(textEnd)
 
-console.log(map);
+let rest = html.slice(textEnd)
+let next = rest.indexOf('<', 1)
+
+console.log(next)
