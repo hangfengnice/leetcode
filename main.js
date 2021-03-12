@@ -1,9 +1,25 @@
-let html = '11<123<'
+let arr = [1, 2, 3];
 
-let textEnd = html.indexOf('<')
-console.log(textEnd)
+const permute = function (nums) {
+  const res = []
+  const len = nums.length
 
-let rest = html.slice(textEnd)
-let next = rest.indexOf('<', 1)
+  const sub = []
 
-console.log(next)
+  dfs(0)
+  return res
+
+  function dfs(index) {
+    res.push(sub.slice())
+
+    for(let i = index; i < len; i ++) {
+      sub.push(nums[i])
+      dfs(i + 1)
+      sub.pop()
+    }
+  }
+};
+
+let res = permute(arr)
+
+console.log(res);
