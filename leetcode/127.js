@@ -193,8 +193,6 @@ var ladderLength = function (beginWord, endWord, wordList) {
 
   let level = 1;
 
-  console.log('good');
-
   while (beginSet.size) {
     let nextBeginSet = new Set();
     for (let key of beginSet) {
