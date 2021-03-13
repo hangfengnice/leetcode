@@ -1,25 +1,17 @@
-let arr = [1, 2, 3];
+const sortedArrayToBST = function (nums) {
+  if(!nums.length) return null
 
-const permute = function (nums) {
-  const res = []
-  const len = nums.length
+  const root = build(0, nums.length - 1)
 
-  const sub = []
+  return root
 
-  dfs(0)
-  return res
-
-  function dfs(index) {
-    res.push(sub.slice())
-
-    for(let i = index; i < len; i ++) {
-      sub.push(nums[i])
-      dfs(i + 1)
-      sub.pop()
+  function build(low, high) {
+    if (low > high) {
+      return null
     }
+
+    let mid = Math.floor(low + (high - low) / 2)
+
   }
-};
+}
 
-let res = permute(arr)
-
-console.log(res);
