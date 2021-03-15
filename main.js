@@ -1,19 +1,29 @@
-const buildTree = function (preorder, inorder) {
-  const len = preorder.length;
-  return build(0, len - 1, 0, len - 1);
+const trap = function (height) {
+  debugger
+  let leftCur = 0;
 
-  function build(preL, preR, inL, inR) {
-    if (preL > preR) return null;
+  let rightCur = height.length - 1;
 
-    const root = new TreeNode();
+  let res = 0;
+  let leftMax = 0;
+  let rightMax = 0;
 
-    root.val = preorder(preL);
+  while (leftCur < rightCur) {
+    const left = height[leftCur];
+    const right = height[rightCur];
 
-    const k = inorder.indexOf(root.val);
-    const numLeft = k - inL;
-    root.left = build(preL + 1, preL + numLeft, inL, k - 1);
-    root.right = build(preL + numLeft + 1, preR, k + 1, inR);
+    if (left < right) {
+      leftMax = Math.max(left, leftMax);
 
-    return root;
+      res += leftMax - left;
+      leftCur++;
+    } else {
+      rightMax = Math.max(right, rightMax);
+      res += rightMax - right;
+      rightCur--;
+    }
   }
+  return res;
 };
+
+trap([0,1,0,2,1,0,1,3,2,1,2,1])
