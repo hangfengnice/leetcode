@@ -1,17 +1,19 @@
-const sortedArrayToBST = function (nums) {
-  if(!nums.length) return null
+const buildTree = function (preorder, inorder) {
+  const len = preorder.length;
+  return build(0, len - 1, 0, len - 1);
 
-  const root = build(0, nums.length - 1)
+  function build(preL, preR, inL, inR) {
+    if (preL > preR) return null;
 
-  return root
+    const root = new TreeNode();
 
-  function build(low, high) {
-    if (low > high) {
-      return null
-    }
+    root.val = preorder(preL);
 
-    let mid = Math.floor(low + (high - low) / 2)
+    const k = inorder.indexOf(root.val);
+    const numLeft = k - inL;
+    root.left = build(preL + 1, preL + numLeft, inL, k - 1);
+    root.right = build(preL + numLeft + 1, preR, k + 1, inR);
 
+    return root;
   }
-}
-
+};

@@ -23,5 +23,23 @@ var pathSum = function (root, sum) {
 };
 
 var pathSum = function (root, sum) {
+  if (!root) return 0;
 
-}
+  let page = findDown(root, sum);
+
+  let leftSum = pathSum(root.left, sum);
+  let rightSum = pathSum(root.right, sum);
+
+  return page + leftSum + rightSum;
+
+  function findDown(node, sum) {
+    if (!node) return 0;
+
+    let flag = node.val == sum ? 1 : 0;
+
+    let leftSum = findDown(node.left, sum - node.val);
+    let rightSum = findDown(node.right, sum - node.val);
+
+    return flag + leftSum + rightSum;
+  }
+};
