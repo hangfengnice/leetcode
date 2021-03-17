@@ -27,10 +27,10 @@
 82
 21
 24
-25 *
+25 \*
 147
 
-148 *自底向上需要在看*
+148 _自底向上需要在看_
 
 237
 
@@ -56,6 +56,7 @@
 126 跟上面的一样 挺有意思的 可以多看看
 
 <!-- kaishi -->
+
 286 ok
 347 ok
 23 ok
@@ -85,23 +86,31 @@
 
 ## 8 递归
 
-17 ok *
+17 ok \*
 93 ok
 131 ok
 46 ok
 47 ok 这里的剪枝很关键
-77 这里的组合 需要 在看 位
-39 40 216 78 90 401
+77 ok 这里的组合 需要 在看 位
+39 ok
+40 ok 递归的出口需要注意
+216 ok
+78 ok
+90 ok [java jsliang 题解 多解](https://leetcode-cn.com/problems/subsets-ii/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-19/)
+[js 多解](https://leetcode-cn.com/problems/subsets-ii/solution/90-zi-ji-ii-by-alexer-660/) 需要多看
+401
 79
-200	130 417
-51	52 37
-70	120 64
-343	279 91 62 63
-198	213 337 309
-416	322 377 474 139 494
-300	376
-455	392
+200 130 417
+51 52 37
+70 120 64
+343 279 91 62 63
+198 213 337 309
+416 322 377 474 139 494
+300 376
+455 392
 435
+
+[github](https://github.com/liuyubobobo/Play-with-Algorithm-Interview)
 
 ## 其他 需要看一下的
 
