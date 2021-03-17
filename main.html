@@ -1,36 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .div {
-      width: 300px;
-      height: 300px;
-      display: grid;
-      align-items: center;
-      justify-content: center;
-      background-color: lightblue;
-      grid-template-columns: 80px auto 100px;
-     grid-template-rows: 25% 100px auto 60px;
-     background-image: linear-gradient(to right, #6799e2, #6170ca, #2f59ad);
-    }
-    .cs-sanfei-btn {
-      border-radius: 6px;
-      background-color: purple;
-    }
-  </style>
-</head>
-<body>
-  helo
-  <div class="div">
-    clas
-  </div>
-  <span class="cs-sanfei-btn">三费订单</span>
-
-  <script src="./main.js"></script>
-  <!-- <script src="./leetcode/126.js"></script> -->
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        margin: 60;
+        display: grid;
+        grid-template-columns: 200px 1fr 2fr;
+        grid-gap: 20px;
+        /* grid-template-rows: 100px 200px; */
+        grid-template-areas:
+          ". header  header"
+          "sidebar content content";
+      }
+      .header {
+        grid-area: header;
+      }
+      .one {
+        background: #19caad;
+      }
+      .two {
+        background: #8cc7b5;
+      }
+      .three {
+        background: #d1ba74;
+      }
+      .four {
+        background: #bee7e9;
+      }
+      .five {
+        background: #e6ceac;
+      }
+      .six {
+        background: #ecad9e;
+      }
+      .item {
+        text-align: center;
+        font-size: 200%;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="one item">One</div>
+      <div class="two item">Two</div>
+      <div class="three item">Three</div>
+      <div class="four item header">Four</div>
+      <div class="five item">Five</div>
+      <div class="six item">Six</div>
+    </div>
+  </body>
 </html>
