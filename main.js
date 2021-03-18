@@ -1,62 +1,29 @@
-const trap = function (height) {
-  let leftCur = 0
-  let rightCur = height.length - 1
+var minPathSum = function (grid) {
+  let m = grid.length;
+  let n = grid[0].length;
+  let dp = new Array(m).fill(0).map(() => new Array(n));
 
-  let res = 0
-  let leftMax = 0
-  let rightMax = 0
-
-  while(leftCur < rightCur) {
-    const left = height[leftCur]
-    const right = height[rightCur]
-
-    if (left < rihgt) {
-      leftMax = Math.max(left, leftMax)
-
-      res += leftMax - left
-
-      leftCur ++
-    } else {
-      rightMax = Math.max(rihgt, rightMax)
-
-      res += rightMax - right
-
-      rightCur --
-    }
+  dp[0][0] = grid[0][0];
+  for (let i = 1; i < n; i++) {
+    dp[0][i] = grid[0][i] + dp[0][i - 1];
   }
-}
-
-const reverseKGroup = function (head, k) {
-  let dummy = new ListNode()
-
-  dummy.next = head
-
-  let pre = dummy
-
-  let start = head
-  let end = head
-
-  let next = head
-
-  while(next) {
-    for(let i = 1; i < k && end; i ++) {
-      end = end.next
-    }
-    if (!end) {
-      break
-    }
-
-    next = end.next
-
-    end.next = null
-
-    end = start
-
-    start = reverse(start)
-
-
-
+  for (let i = 1; i < m; i++) {
+    dp[i][0] = grid[i][0] + dp[i - 1][0];
   }
 
-  return dummy.next
-}
+
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+    }
+  }
+  return dp[m - 1][n - 1];
+};
+
+let res = minPathSum([
+  [1, 3, 1],
+  [1, 5, 1],
+  [4, 2, 1],
+]);
+
+console.log(res);
