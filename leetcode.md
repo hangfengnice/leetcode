@@ -99,10 +99,16 @@
 90 ok [java jsliang 题解 多解](https://leetcode-cn.com/problems/subsets-ii/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-19/)
 [js 多解](https://leetcode-cn.com/problems/subsets-ii/solution/90-zi-ji-ii-by-alexer-660/) 需要多看
 401 ok 可以在看一下
-79
-200 130 417
+79 ok
+200 ok
+130 ok 并查集 的 地方需要 在看
+417 ok 麻烦
 51 52 37
-70 120 64
+70
+
+## 动态规划
+
+120 64
 343 279 91 62 63
 198 213 337 309
 416 322 377 474 139 494
