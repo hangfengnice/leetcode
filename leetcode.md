@@ -126,8 +126,9 @@
 377 ok 需要在看 [liweiwei](https://leetcode-cn.com/problems/combination-sum-iv/solution/dong-tai-gui-hua-python-dai-ma-by-liweiwei1419/)
 474 ok 在看
 139 ok 需消化
-494
-300 376
+494 ok 需看 动态规划
+300 ok
+376
 455 392
 435
 
