@@ -1,18 +1,67 @@
-var coinChange = function (coins, amount) {
-  let dp = new Array(amount + 1).fill(amount + 1);
-  console.log(dp);
-  dp[0] = 0;
-  for (let i = 1; i <= amount; i++) {
-    for (let j = 0; j < coins.length; j++) {
-      if (coins[j] <= i) {
-        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+var find132pattern = function(nums) {
+  debugger
+  const n = nums.length;
+  const candidateI = [nums[0]], candidateJ = [nums[0]];
+
+  for (let k = 1; k < n; ++k) {
+      const idxI = binarySearchFirst(candidateI, nums[k]);
+      const idxJ = binarySearchLast(candidateJ, nums[k]);
+      if (idxI >= 0 && idxJ >= 0) {
+          if (idxI <= idxJ) {
+              return true;
+          }
       }
-    }
+
+      if (nums[k] < candidateI[candidateI.length - 1]) {
+          candidateI.push(nums[k]);
+          candidateJ.push(nums[k]);
+      } else if (nums[k] > candidateJ[candidateJ.length - 1]) {
+          const lastI = candidateI[candidateI.length - 1];
+          while (candidateJ.length && nums[k] > candidateJ[candidateJ.length - 1]) {
+              candidateI.pop();
+              candidateJ.pop();
+          }
+          candidateI.push(lastI);
+          candidateJ.push(nums[k]);
+      }
   }
-  console.log(dp)
-  return dp[amount] > amount ? -1 : dp[amount];
+
+  return false;
 };
 
-let res = coinChange([1, 2, 5], 11)
+const binarySearchFirst = (candidate, target) => {
+  let low = 0, high = candidate.length - 1;
+  if (candidate[high] >= target) {
+      return -1;
+  }
+  while (low < high) {
+      const mid = Math.floor((high - low) / 2) + low;
+      const num = candidate[mid];
+      if (num >= target) {
+          low = mid + 1;
+      } else {
+          high = mid;
+      }
+  }
+  return low;
+}
 
-console.log(res);
+const binarySearchLast = (candidate, target) => {
+  let low = 0, high = candidate.length - 1;
+  if (candidate[low] <= target) {
+      return -1;
+  }
+  while (low < high) {
+      const mid = Math.floor((high - low + 1) / 2) + low;
+      const num = candidate[mid];
+      if (num <= target) {
+          high = mid - 1;
+      } else {
+          low = mid;
+      }
+  }
+  return low;
+}
+
+
+let res = find132pattern([3,1,4,2])
