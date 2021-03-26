@@ -1,67 +1,22 @@
-var find132pattern = function(nums) {
-  debugger
-  const n = nums.length;
-  const candidateI = [nums[0]], candidateJ = [nums[0]];
+var deleteDuplicates = function (head) {
+  if (!head) return head;
 
-  for (let k = 1; k < n; ++k) {
-      const idxI = binarySearchFirst(candidateI, nums[k]);
-      const idxJ = binarySearchLast(candidateJ, nums[k]);
-      if (idxI >= 0 && idxJ >= 0) {
-          if (idxI <= idxJ) {
-              return true;
-          }
-      }
+  let dummy = new ListNode();
 
-      if (nums[k] < candidateI[candidateI.length - 1]) {
-          candidateI.push(nums[k]);
-          candidateJ.push(nums[k]);
-      } else if (nums[k] > candidateJ[candidateJ.length - 1]) {
-          const lastI = candidateI[candidateI.length - 1];
-          while (candidateJ.length && nums[k] > candidateJ[candidateJ.length - 1]) {
-              candidateI.pop();
-              candidateJ.pop();
-          }
-          candidateI.push(lastI);
-          candidateJ.push(nums[k]);
+  dummy.next = head;
+
+  let cur = dummy;
+
+  while (cur.next && cur.next.next) {
+    if (cur.next.val == cur.next.next.val) {
+      let val = cur.next.val;
+      while (cur.next && cur.next.val == val) {
+        cur.next = cur.next.next;
       }
+    } else {
+      cur = cur.next;
+    }
   }
 
-  return false;
+  return dummy.next;
 };
-
-const binarySearchFirst = (candidate, target) => {
-  let low = 0, high = candidate.length - 1;
-  if (candidate[high] >= target) {
-      return -1;
-  }
-  while (low < high) {
-      const mid = Math.floor((high - low) / 2) + low;
-      const num = candidate[mid];
-      if (num >= target) {
-          low = mid + 1;
-      } else {
-          high = mid;
-      }
-  }
-  return low;
-}
-
-const binarySearchLast = (candidate, target) => {
-  let low = 0, high = candidate.length - 1;
-  if (candidate[low] <= target) {
-      return -1;
-  }
-  while (low < high) {
-      const mid = Math.floor((high - low + 1) / 2) + low;
-      const num = candidate[mid];
-      if (num <= target) {
-          high = mid - 1;
-      } else {
-          low = mid;
-      }
-  }
-  return low;
-}
-
-
-let res = find132pattern([3,1,4,2])
