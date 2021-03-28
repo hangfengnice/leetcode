@@ -1,22 +1,28 @@
-var deleteDuplicates = function (head) {
-  if (!head) return head;
+var rotateRight = function (head, k) {
+  if (!k || !head || !head.next) return head;
 
-  let dummy = new ListNode();
-
-  dummy.next = head;
-
-  let cur = dummy;
-
-  while (cur.next && cur.next.next) {
-    if (cur.next.val == cur.next.next.val) {
-      let val = cur.next.val;
-      while (cur.next && cur.next.val == val) {
-        cur.next = cur.next.next;
-      }
-    } else {
-      cur = cur.next;
-    }
+  let n = 1;
+  let cur = head;
+  while (cur.next) {
+    cur = cur.next;
+    n++;
   }
 
-  return dummy.next;
+  let add = n - (k % n);
+  if (add == n) {
+    return head;
+  }
+
+  cur.next = head;
+
+  while (add) {
+    cur = cur.next;
+    add--;
+  }
+
+  const ret = cur.next;
+
+  cur.next = null;
+
+  return ret;
 };
