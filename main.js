@@ -1,17 +1,21 @@
-var findErrorNums = function (nums) {
+var findDisappearedNumbers = function (nums) {
+  let n = nums.length;
+  for (let num of nums) {
+    const x = (num - 1) % n;
+    nums[x] += n;
+  }
 
+  const ret = [];
+
+  for (const [i, num] of nums.entries()) {
+    if (num <= n) {
+      ret.push(i + 1);
+    }
+  }
+
+  return ret;
 };
 
+let res = findDisappearedNumbers([4,3,2,7,8,2,3,1])
 
-function flatten(arr, depth = 1)  {
-  return arr.reduce((a, v) => a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1): v), [])
-}
-
-
-let arr = [[[12, 3], 4]]
-
-let res = flatten(arr)
-
-console.log([].concat(arr));
-
-console.log(res);
+console.log(res)
