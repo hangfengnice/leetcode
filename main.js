@@ -1,28 +1,10 @@
-var rotateRight = function (head, k) {
-  if (!k || !head || !head.next) return head;
+let M1 = 0b01
 
-  let n = 1;
-  let cur = head;
-  while (cur.next) {
-    cur = cur.next;
-    n++;
-  }
+let n = 0b10
 
-  let add = n - (k % n);
-  if (add == n) {
-    return head;
-  }
+console.log(n >>> 1 & M1);
+console.log((n & M1) << 1);
+n = n >>> 1 & M1 | (n & M1) << 1
 
-  cur.next = head;
 
-  while (add) {
-    cur = cur.next;
-    add--;
-  }
-
-  const ret = cur.next;
-
-  cur.next = null;
-
-  return ret;
-};
+console.log(n)
