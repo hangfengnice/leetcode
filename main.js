@@ -1,21 +1,11 @@
-var findDisappearedNumbers = function (nums) {
-  let n = nums.length;
-  for (let num of nums) {
-    const x = (num - 1) % n;
-    nums[x] += n;
+var firstMissingPositive = function(nums) {
+  let s = new Set(nums), i
+  for(i = 1; i <= nums.length; i ++) {
+    if (!s.has(i)) return i
   }
-
-  const ret = [];
-
-  for (const [i, num] of nums.entries()) {
-    if (num <= n) {
-      ret.push(i + 1);
-    }
-  }
-
-  return ret;
+  return i
 };
 
-let res = findDisappearedNumbers([4,3,2,7,8,2,3,1])
+let res = firstMissingPositive([1, 2])
 
-console.log(res)
+console.log(res, 'res')
