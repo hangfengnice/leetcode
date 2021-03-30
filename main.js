@@ -1,11 +1,20 @@
-var firstMissingPositive = function(nums) {
-  let s = new Set(nums), i
-  for(i = 1; i <= nums.length; i ++) {
-    if (!s.has(i)) return i
+var moveZeroes = function (nums) {
+  let slow = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (!!nums[i]) {
+      if (slow != i) {
+        let temp = nums[i];
+        nums[i] = nums[slow];
+        nums[slow] = temp;
+      }
+      slow++;
+    }
   }
-  return i
 };
 
-let res = firstMissingPositive([1, 2])
+let arr = [1, 3, 5, 0, 4];
 
-console.log(res, 'res')
+let res = moveZeroes(arr);
+
+console.log(arr);
