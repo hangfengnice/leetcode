@@ -1,34 +1,23 @@
-// var subsetsWithDup = function (nums) {
-//   nums.sort((a, b) => a - b);
-
-//   let res = [];
-//   dfs([], 0);
-//   return res;
-//   function dfs(temp, start) {
-//     res.push(temp.slice());
-
-//     for (let i = start; i < nums.length; i++) {
-//       if (i > start && nums[i] == nums[i - 1]) continue;
-//       temp.push(nums[i]);
-//       dfs(temp, i + 1);
-//       temp.pop();
-//     }
-//   }
-// };
-
-// 迭代
 var subsetsWithDup = function (nums) {
-  let ans = [[]]
-  nums.sort((a, b) => a - b)
-  let start = 1
+  let n = nums.length;
+  nums.sort((a, b) => a - b);
 
-  for(let i = 0; i < nums.length; i ++) {
-    let temp = []
-    for(let j = 0; j < ans.length; j ++) {
-      let list = ans[j]
-      if (i > 0 && nums[i] == nums[i - 1] && j < start) {
-        continue
-      }
+  let res = [];
+  let has = {};
+
+  dfs([], 0);
+
+  return res;
+  function dfs(sub, start) {
+    res.push(sub.slice());
+
+    for (let i = start; i < n; i++) {
+      if (has[i] || (i > 0 && !has[i - 1] && nums[i - 1] == nums[i])) continue;
+      has[i] = true;
+      sub.push(nums[i]);
+      dfs(sub, i + 1);
+      sub.pop();
+      has[i] = false;
     }
   }
-}
+};
