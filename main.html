@@ -6,53 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .wrapper {
-        margin: 60;
-        display: grid;
-        grid-template-columns: 200px 1fr 2fr;
-        grid-gap: 20px;
-        /* grid-template-rows: 100px 200px; */
-        grid-template-areas:
-          ". header  header"
-          "sidebar content content";
+      html {
+        height: 100%;
       }
-      .header {
-        grid-area: header;
+      body {
+        height: 100%;
+        display: flex;
+        margin: 0;
       }
-      .one {
-        background: #19caad;
-      }
-      .two {
-        background: #8cc7b5;
-      }
-      .three {
-        background: #d1ba74;
-      }
-      .four {
-        background: #bee7e9;
-      }
-      .five {
-        background: #e6ceac;
-      }
-      .six {
-        background: #ecad9e;
-      }
-      .item {
-        text-align: center;
-        font-size: 200%;
-        color: #fff;
+      .content {
+        width: 300px;
+        height: 150px;
+        margin: auto;
+        -webkit-mask: radial-gradient(circle at 0, transparent 20px, red 0);
+        background: linear-gradient(45deg, orange, red);
       }
     </style>
   </head>
   <body>
-    <script src="./main.js"></script>
-    <!-- <div class="wrapper">
-      <div class="one item">One</div>
-      <div class="two item">Two</div>
-      <div class="three item">Three</div>
-      <div class="four item header">Four</div>
-      <div class="five item">Five</div>
-      <div class="six item">Six</div>
-    </div> -->
+    <div class="content"></div>
+    <script>
+      console.log(1);
+      Promise.resolve().then(() => console.log("di yi"));
+      queueMicrotask(() => console.log("hahha"));
+    </script>
+
+    <script>
+      console.log(2);
+      Promise.resolve().then(() => console.log("di er"));
+    </script>
   </body>
 </html>
