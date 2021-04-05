@@ -1,26 +1,28 @@
-var setZeroes = function (matrix) {
-  let m = matrix.length;
-  let n = matrix[0].length;
-  console.log(m, n);
-  let rows = new Array(m).fill(false);
-  let cols = new Array(n).fill(false);
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
+var lowestCommonAncestor = function (root, p, q) {
+  let parent = new Map();
+  let visited = new Set();
+  dfs(root);
 
-      if (!matrix[i][j]) {
-        rows[i] = cols[j] = true;
-      }
-    }
+  while (!!p) {
+    visited.add(p.val);
+    p = parent.get(p.val);
   }
+  while (!!q) {
+    if (visited.has(q.val)) {
+      return q;
+    }
+    q = parent.get(q.val);
+  }
+  return null;
 
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (rows[i] || cols[j]) {
-        matrix[i][j] = 0;
-      }
+  function dfs(root) {
+    if (!!root.left) {
+      parent.set(root.left.val, root);
+      dfs(root.left);
+    }
+    if (!!root.right) {
+      parent.set(root.right.val, root);
+      dfs(root.right);
     }
   }
 };
-
-
-let res = setZeroes([[1,1,1],[1,0,1],[1,1,1]])
