@@ -1,28 +1,15 @@
-var lowestCommonAncestor = function (root, p, q) {
-  let parent = new Map();
-  let visited = new Set();
-  dfs(root);
-
-  while (!!p) {
-    visited.add(p.val);
-    p = parent.get(p.val);
+var removeDuplicates = function (nums) {
+  let n = nums.length;
+  if (n < 3) {
+    return n;
   }
-  while (!!q) {
-    if (visited.has(q.val)) {
-      return q;
-    }
-    q = parent.get(q.val);
-  }
-  return null;
-
-  function dfs(root) {
-    if (!!root.left) {
-      parent.set(root.left.val, root);
-      dfs(root.left);
-    }
-    if (!!root.right) {
-      parent.set(root.right.val, root);
-      dfs(root.right);
+  let sp = 2;
+  for (let fast = 2; fast < n; fast++) {
+    if (nums[sp - 2] != nums[fast]) {
+      nums[sp] = nums[fast];
     }
   }
+  return sp;
 };
+let res = removeDuplicates([0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3]);
+console.log(res, "res");
