@@ -11,18 +11,10 @@ var originalDigits = function (s) {
   res[7] = match("v") - res[5];
   res[9] = match("i") - res[5] - res[6] - res[8];
 
-  console.log(res, 'res');
-  return res.reduce(
-    (str, times, num) => str + num.toString().repeat(times),
-    ""
-  );
+  return res.reduce((str, times, num) => str + String(num).repeat(times), "");
 
   function match(char) {
     s;
     return (s.match(new RegExp(char, "g")) || []).length;
   }
 };
-
-let res = originalDigits("towone");
-
-console.log(res);
