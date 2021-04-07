@@ -1,25 +1,16 @@
-const dinner = {
-  meal: 'tacos'
-}
-
-const handler = {
-  get(target, prop) {
-    console.log('intercepted');
-    return target[prop]
-  },
-  set(target, prop, value) {
-    let oldval = target[prop]
-
-    if (oldval != value) {
-      target[prop] = value
-    }
+var groupAnagrams = function (strs) {
+  let map = new Map();
+  for (let s of strs) {
+    let array = Array.from(s);
+    array.sort();
+    let key = array.toString();
+    let list = map.get(key) ? map.get(key) : [];
+    list.push(s);
+    map.set(key, list);
   }
-}
+  return Array.from(map.values());
+};
 
-let p = new Proxy(dinner, handler)
-
-
-console.log(p.meal);
-p.meal = 1
-// console.log(p.meal);
-
+let m = new Map()
+m.set('1', [1])
+m.set('2', '2')
