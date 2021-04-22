@@ -5,95 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      html {
-        height: 100%;
-      }
-      body {
-        height: 100%;
-        display: flex;
-        margin: 0;
-      }
-      .content {
-        width: 300px;
-        height: 150px;
-        margin: auto;
-        background: linear-gradient(45deg, orange, red);
-      }
-    </style>
+    <style></style>
   </head>
   <body>
-    <div class="content"></div>
+    <div class="foo div" title='title'>hello wrold</div>
+
+
+
+
     <script>
-      function getSequence(arr) {
-        // debugger
-        const p = arr.slice();
+      let div = document.getElementsByClassName('div foo')
 
-        const result = [0];
+      console.log(div[0].attributes, 'attributes')
 
-        let i, j, u, v, c;
 
-        const len = arr.length;
+      div[0].appendChild(document.createTextNode('text'))
 
-        for (i = 0; i < len; i++) {
-          const arrI = arr[i];
 
-          if (arrI !== 0) {
-            j = result[result.length - 1];
-
-            if (arr[j] < arrI) {
-              // 存储在 result 更新前的最后一个索引的值
-
-              p[i] = j;
-
-              result.push(i);
-
-              continue;
-            }
-
-            u = 0;
-
-            v = result.length - 1;
-
-            // 二分搜索，查找比 arrI 小的节点，更新 result 的值
-
-            while (u < v) {
-              c = ((u + v) / 2) | 0;
-
-              if (arr[result[c]] < arrI) {
-                u = c + 1;
-              } else {
-                v = c;
-              }
-            }
-
-            if (arrI < arr[result[u]]) {
-              if (u > 0) {
-                p[i] = result[u - 1];
-              }
-
-              result[u] = i;
-            }
-          }
-        }
-
-        u = result.length;
-
-        v = result[u - 1];
-
-        // 回溯数组 p，找到最终的索引
-
-        while (u-- > 0) {
-          result[u] = v;
-
-          v = p[v];
-        }
-
-        return result;
-      }
-
-     let res = getSequence([2, 1, 5, 3, 6, 4, 8, 9, 7]);
-     console.log(res)
     </script>
   </body>
 </html>
