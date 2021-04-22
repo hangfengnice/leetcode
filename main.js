@@ -1,147 +1,100 @@
-// let data = {
-// 	"responsecode": "1",
-// 	"responsemessage": "",
-// 	"routeFieldList": "",
-// 	"resultlist": [{
-// 			"tabid": "baseinfo",
-// 			"tabname": "基本信息",
-// 			"secondlist": [{
-// 					"thirdlist": [{
-// 							"itemvalue": "烽火通信科技股份有限公司",
-// 							"itemname": "检测单位"
-// 						},
-// 						{
-// 							"itemvalue": null,
-// 							"itemname": "检测人"
-// 						},
-// 						{
-// 							"itemvalue": "厂家自检",
-// 							"itemname": "检测方式"
-// 						},
-// 						{
-// 							"itemvalue": null,
-// 							"itemname": "检测日期"
-// 						},
-// 						{
-// 							"itemvalue": "物料dfd",
-// 							"itemname": "送检产品"
-// 						},
-// 						{
-// 							"itemvalue": "11",
-// 							"itemname": "送检数量"
-// 						},
-// 						{
-// 							"itemvalue": null,
-// 							"itemname": "送检结果"
-// 						},
-// 						{
-// 							"itemvalue": "QT221021040129",
-// 							"itemname": "单据编号"
-// 						},
-// 						{
-// 							"itemvalue": "2021-04-19烽火通信科技股份有限公司物料dfd厂家自检结果录入",
-// 							"itemname": "单据名称"
-// 						}
-// 					],
-// 					"title": "基本信息"
-// 				},
-// 				{
-// 					"thirdlist": [{
-// 							"itemvalue": "121",
-// 							"itemname": "抽检串码"
-// 						},
-// 						{
-// 							"standards": [
-//                 {
-// 									"itemvalue": [{
-// 											"itemvalue": "含气量不能超过100%",
-// 											"itemname": "检测标准"
-// 										},
-// 										{
-// 											"itemvalue": "N",
-// 											"itemname": "是否合格"
-// 										},
-// 										{
-// 											"itemvalue": "443",
-// 											"itemname": "质检数据"
-// 										}
-// 									],
-// 									"itemname": "检测标准"
-// 								},
-// 								{
-// 									"itemvalue": [{
-// 											"itemvalue": "含气量不能超过100%",
-// 											"itemname": "检测标准"
-// 										},
-// 										{
-// 											"itemvalue": "N",
-// 											"itemname": "是否合格"
-// 										},
-// 										{
-// 											"itemvalue": "443",
-// 											"itemname": "质检数据"
-// 										}
-// 									],
-// 									"itemname": "检测标准"
-// 								}
-// 							]
-// 						},
-// 						{
-// 							"itemvalue": "2021-04-19 00:00:00.0",
-// 							"itemname": "检测日期"
-// 						},
-// 						{
-// 							"itemvalue": null,
-// 							"itemname": "抽检结果"
-// 						},
-// 						{
-// 							"itemvalue": null,
-// 							"itemname": "备注说明"
-// 						}
-// 					],
-// 					"title": "明细清单"
-// 				}
-// 			],
-// 			"type": "block"
-// 		},
-// 		{
-// 			"tabid": "approvehistory",
-// 			"tabname": "审批历史",
-// 			"secondlist": "",
-// 			"type": "block"
-// 		},
-// 		{
-// 			"tabid": "attachment",
-// 			"tabname": "附件",
-// 			"r_object_id": "",
-// 			"type": "list"
-// 		}
-// 	],
-// 	"sys_status": "1"
-// }
+// var minWindow = function (s, t) {
+//   let map = {};
 
-var minSubArrayLen = function (s, nums) {
-  let n = nums.length
-  let left = 0, right = 0
-  let match = 0
-  let windows = {}
-  let resMax = Number.MAX_SAFE_INTEGER
+//   for (let i = 0; i < t.length; i++) {
+//     let char = t[i];
+//     map[char] = map[char] + 1 || 1;
+//   }
 
-  while(right < n) {
-    let c1 = nums[right]
-    windows[c1] = windows[c1] + 1 || 1
-    match += c1
-    right ++
+//   let left = 0;
+//   let right = 0;
+//   let ans_left = 0;
+//   let ans_right = -1;
+//   let ans_len = Number.MAX_SAFE_INTEGER;
 
-    while(match >= s) {
-      let c2 = nums[left]
-      let sum = add(...Object.values(windows))
+//   while (right < s.length) {
+//     let char_right = s[right];
+//     if (char_right in map) {
+//       map[char_right]--;
+
+//       while (match(map)) {
+//         let temp_len = right - left + 1;
+
+//         if (temp_len < ans_len) {
+//           ans_left = left;
+//           ans_right = right;
+//           ans_len = temp_len;
+//         }
+
+//         let char_key = s[left];
+//         if (char_key in map) {
+//           map[char_key]++;
+//         }
+//         left++;
+//       }
+//     }
+//     right++;
+//   }
+//   return s.substring(ans_left, ans_right + 1);
+
+//   function match(obj) {
+//     for (let val of Object.values(obj)) {
+//       if (val > 0) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   }
+// };
+
+var minWindow = function (s, t) {
+  let map = new Array(128).fill(0);
+
+  for (let i = 0; i < t.length; i++) {
+    map[t[i].codePointAt()]++;
+  }
+
+  console.log(map);
+
+  let left = 0;
+  let right = 0;
+  let ans_left = 0;
+  let ans_right = 0;
+  let ans_len = Number.MAX_SAFE_INTEGER;
+
+  let count = t.length;
+
+  while (right < s.length) {
+    let char_right = s[right].codePointAt();
+
+    map[char_right]--;
+
+    if (map[char_right] >= 0) {
+      count--;
     }
+
+    while (count == 0) {
+      let temp_len = right - left + 1;
+      if (temp_len < ans_len) {
+        ans_left = left;
+        ans_right = right;
+        ans_len = temp_len;
+      }
+      let key = s[left].codePointAt();
+
+      map[key]++;
+
+      if (map[key] > 0) {
+        count++;
+      }
+      left++;
+    }
+    right++;
   }
 
-  return resMax == Number.MAX_SAFE_INTEGER ? 0 : resMax
+  return s.substring(ans_left, ans_right + 1);
+};
 
-  function add() {
-    return [].reduce.call(arguments, function (a, b) {return a + b})
-  }
-}
+let res = minWindow("ADOBECODEBANC", "ABC");
+
+console.log(res, "res");
