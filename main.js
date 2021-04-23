@@ -1,16 +1,12 @@
-let obj = {
-  name: 'hf',
-  age: 12,
-  *[Symbol.iterator]() {
-    let vals = Object.values(obj)
+var getIntersectionNode = function (headA, headB) {
+  if (!headA || !headB) return null;
 
-    while(vals.length) {
-     let val = vals.pop()
-      yield val
-    }
+  let a = headA,
+    b = headB;
+
+  while (a != b) {
+    a = a == null ? b : a.next;
+    b = b == null ? a : b.next;
   }
-}
-
-for(let val of obj) {
-  console.log(val);
-}
+  return a;
+};
