@@ -1,12 +1,15 @@
-var getIntersectionNode = function (headA, headB) {
-  if (!headA || !headB) return null;
+var getIntersectionNode = function (headA, headB) {};
 
-  let a = headA,
-    b = headB;
+var combinationSum4 = function (nums, target) {
+  const dp = new Array(target + 1).fill(0);
+  dp[0] = 1;
 
-  while (a != b) {
-    a = a == null ? b : a.next;
-    b = b == null ? a : b.next;
+  for (let i = 1; i <= target; i++) {
+    for (let num of nums) {
+      if (num <= i) {
+        dp[i] += dp[i - num];
+      }
+    }
   }
-  return a;
+  return dp[target];
 };
