@@ -6,44 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .flex {
-        display: flex;
-        flex-wrap: wrap-reverse;
-        flex-direction: row-reverse;
-        align-items: center;
+      /* figure {
+        display: inline-grid;
       }
-      .child {
-        width:30%;
-        height: 40px;
-        background-color: lightblue;
+      figure > img,
+      figure > figcaption {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+      figure > figcaption {
+        align-self: end;
         text-align: center;
+        background-color: #0009;
         color: #fff;
-        font-size: 24px;
-        margin: 0 10px;
+        line-height: 2;
+      } */
+      .img {
+        height: 40px;
+        float: left;
+
       }
-      .child1 {
-        flex: none;
-        /* align-self: f; */
+      .parent {
+        border: 1px solid;
       }
     </style>
   </head>
   <body>
-    <div class="flex">
-      <div class="child child1">1</div>
-      <div class="child child2">2</div>
-      <div class="child child3">3</div>
-      <div class="child child4">4</div>
+    <div class="parent">
+      <img
+      class="img"
+        src="https://pic4.zhimg.com/80/v2-83e077d35a5c2292176474cf4af09c6b_1440w.jpg"
+        alt="上海钓鱼自然风景"
+      />
+
+      <div>上海钓鱼自然风景 by zhangxinxu</div>
     </div>
 
+    <div>hello</div>
 
-
-
-    <script>
-      let child1 = document.querySelector('.child1')
-
-      console.log(getComputedStyle(child1).flex)
-
-
-    </script>
+    <script></script>
   </body>
 </html>
