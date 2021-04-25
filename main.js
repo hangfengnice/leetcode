@@ -1,15 +1,25 @@
-var getIntersectionNode = function (headA, headB) {};
+var pathSum = function (root, targetSum) {
+  let map = new Map();
 
-var combinationSum4 = function (nums, target) {
-  const dp = new Array(target + 1).fill(0);
-  dp[0] = 1;
+  let ans = 0;
+  dfs(root, 0);
 
-  for (let i = 1; i <= target; i++) {
-    for (let num of nums) {
-      if (num <= i) {
-        dp[i] += dp[i - num];
-      }
+  return ans;
+
+  function dfs(root, presum) {
+    if (!root) {
+      return 0;
     }
+
+    map.set(presum, (map.get(presum) || 0) + 1);
+
+    let target = presum + root.val;
+
+    ans += map.get(target - targetSum) || 0;
+
+    dfs(root.left, target);
+    dfs(root.right, target);
+
+    map.set(presum, map.get(presum) - 1);
   }
-  return dp[target];
 };
