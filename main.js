@@ -1,25 +1,13 @@
-var pathSum = function (root, targetSum) {
-  let map = new Map();
+let depids = new Set([1, 2])
 
-  let ans = 0;
-  dfs(root, 0);
+let newdepids = new Set([3, 4 ])
 
-  return ans;
+let temp = depids
 
-  function dfs(root, presum) {
-    if (!root) {
-      return 0;
-    }
+depids = newdepids
 
-    map.set(presum, (map.get(presum) || 0) + 1);
+newdepids = temp
 
-    let target = presum + root.val;
+newdepids.clear()
 
-    ans += map.get(target - targetSum) || 0;
-
-    dfs(root.left, target);
-    dfs(root.right, target);
-
-    map.set(presum, map.get(presum) - 1);
-  }
-};
+console.log(depids, newdepids);
