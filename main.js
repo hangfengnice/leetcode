@@ -1,13 +1,23 @@
-let depids = new Set([1, 2])
+var convert = function (s, numRows) {
+  if (numRows == 1) return s
 
-let newdepids = new Set([3, 4 ])
+  let len = Math.min(s.length, numRows)
 
-let temp = depids
+  const rows = new Array(len).fill('')
 
-depids = newdepids
+  let loc = 0
+  let down = false
 
-newdepids = temp
+  for(let c of s) {
+    rows[loc] += c
+    if (loc == 0 || loc == numRows - 1) {
+      down = !down
+    }
+    loc += down ? 1 : -1
+  }
 
-newdepids.clear()
+  for(let row of rows) {
 
-console.log(depids, newdepids);
+  }
+
+}
