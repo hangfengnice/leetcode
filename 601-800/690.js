@@ -1,25 +1,19 @@
-var validPalindrome = function (s) {
-  let l = 0,
-    r = s.length - 1;
-  while (l < r) {
-    if (s[l] == s[r]) {
-      l++;
-      r--;
-    } else {
-      return isValid(s, l + 1, r) || isValid(s, l, r - 1);
-    }
+var GetImportance = function (employees, id) {
+  console.log(employees);
+  const map = new Map();
+  for (const employee of employees) {
+    map.set(employee.id, employee);
   }
-  return true;
 
-  function isValid(s, left, right) {
-    while (left < right) {
-      if (s[left] == s[right]) {
-        left++;
-        right--;
-      } else {
-        return false;
-      }
+  return dfs(id);
+
+  function dfs(id) {
+    const employee = map.get(id);
+    let total = employee.importance;
+    const subordinates = employee.subordinates;
+    for (const subId of subordinates) {
+      total += dfs(subId);
     }
-    return true;
+    return total;
   }
 };
