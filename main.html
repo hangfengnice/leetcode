@@ -6,43 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      /* figure {
-        display: inline-grid;
+      div  {
+        width: 200px;
       }
-      figure > img,
-      figure > figcaption {
-        grid-area: 1 / 1 / 2 / 2;
-      }
-      figure > figcaption {
-        align-self: end;
-        text-align: center;
-        background-color: #0009;
-        color: #fff;
-        line-height: 2;
-      } */
-      .img {
-        height: 40px;
-        float: left;
-
-      }
-      .parent {
-        border: 1px solid;
+      .hide {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
     </style>
   </head>
   <body>
-    <div class="parent">
-      <img
-      class="img"
-        src="https://pic4.zhimg.com/80/v2-83e077d35a5c2292176474cf4af09c6b_1440w.jpg"
-        alt="上海钓鱼自然风景"
-      />
-
-      <div>上海钓鱼自然风景 by zhangxinxu</div>
+    <div >
+      hello 我认可的我耳机哦无人机ojh好
     </div>
+    <button>点击</button>
+    <script>
+      let div = document.querySelector('div')
+      let styleDiv = div.getBoundingClientRect().height
+      if (styleDiv > 32) {
+        div.classList.add('hide')
+      }
 
-    <div>hello</div>
-
-    <script></script>
+      let button = document.querySelector('button')
+      button.addEventListener('click', function () {
+        div.classList.toggle('hide')
+      })
+    </script>
   </body>
 </html>
