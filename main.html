@@ -23,6 +23,7 @@
       hello 我认可的我耳机哦无人机ojh好
     </div>
     <button>点击</button>
+    <input type="text">
     <script>
       let div = document.querySelector('div')
       let styleDiv = div.getBoundingClientRect().height
@@ -33,6 +34,12 @@
       let button = document.querySelector('button')
       button.addEventListener('click', function () {
         div.classList.toggle('hide')
+      })
+
+      let input = document.querySelector('input')
+      console.log(input, 'input')
+      input.addEventListener('change', e => {
+        console.log(e, 'e', e.value)
       })
     </script>
   </body>
