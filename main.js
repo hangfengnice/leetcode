@@ -1,7 +1,10 @@
-top:
-  for (var i = 0; i < 3; i++){
-    for (var j = 0; j < 3; j++){
-      if (i === 1 && j === 1) continue top;
-      console.log('i=' + i + ', j=' + j);
-    }
+function foo() {
+  var a = 1;
+  var b = { name: "极客邦" };
+  function showName() {
+    var c = 2;
+    var d = { name: "极客时间" };
   }
+  showName();
+}
+foo();
