@@ -1,10 +1,20 @@
-function foo() {
-  var a = 1;
-  var b = { name: "极客邦" };
-  function showName() {
-    var c = 2;
-    var d = { name: "极客时间" };
-  }
-  showName();
+async function foo() {
+  console.log("foo");
 }
-foo();
+async function bar() {
+  console.log("bar start");
+  await foo();
+  console.log("bar end");
+}
+console.log("script start");
+setTimeout(function () {
+  console.log("setTimeout");
+}, 0);
+bar();
+new Promise(function (resolve) {
+  console.log("promise executor");
+  resolve();
+}).then(function () {
+  console.log("promise then");
+});
+console.log("script end");
