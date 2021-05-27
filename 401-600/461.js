@@ -10,7 +10,3 @@ var hammingDistance = function (x, y) {
   }
   return count;
 };
-
-let res = hammingDistance(1, 4);
-
-console.log(res, "res");
