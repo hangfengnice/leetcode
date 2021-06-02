@@ -18,6 +18,6 @@ var subarraySum = function (nums, k) {
   return count;
 };
 
-let res = subarraySum([1, 1, 1], 2)
+let res = subarraySum([1, 1, 1], 2);
 
-console.log(res, 'res');
+console.log(res, "res");
