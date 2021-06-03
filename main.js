@@ -1,36 +1,18 @@
-var isPalindrome = function (head) {
-  if (!head || !head.next) return head;
+var majorityElement = function(nums) {
+  let map = new Map()
+  let majority = 0, cnt = 0
+  for(let num of nums) {
+    map[nums] = (map[nums] || 0) + 1
 
-  let vals = [];
-
-  while (head) {
-    vals.push(head.val);
-    head = head.next;
-  }
-
-  for (let i = 0, j = vals.length - 1; i < j; i++, j--) {
-    if (vals[i] != vals[j]) {
-      return false;
+    if (map[nums] > cnt) {
+      majority = num
+      cnt = map[nums]
     }
   }
+
+  return majority
 };
 
-var isPalindrome = function (head) {
-  let frontPointer = head;
-  return recursivelyCheck(head);
+let res = majorityElement([1, 2, 2])
 
-  function recursivelyCheck(currenNode) {
-    if (currenNode !== null) {
-      if (!recursivelyCheck(currenNode.next)) {
-        return false;
-      }
-      if (currenNode.val !== frontPointer.val) {
-        return false;
-      }
-      frontPointer = frontPointer.next;
-    }
-    return true;
-  }
-};
-
-[1, 2, 3] 4
+console.log(res, 'res');
