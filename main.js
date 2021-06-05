@@ -1,18 +1,15 @@
-var majorityElement = function(nums) {
-  let map = new Map()
-  let majority = 0, cnt = 0
-  for(let num of nums) {
-    map[nums] = (map[nums] || 0) + 1
-
-    if (map[nums] > cnt) {
-      majority = num
-      cnt = map[nums]
-    }
+var getIntersectionNode = function (headA, headB) {
+  if (!headA || !headB) {
+    return null;
   }
 
-  return majority
+  let pa = headA,
+    pb = headB;
+
+  while (pa !== pb) {
+    pa = !pa ? headB : pa.next;
+    pb = !pb ? headA : pb.next;
+  }
+
+  return pa;
 };
-
-let res = majorityElement([1, 2, 2])
-
-console.log(res, 'res');
