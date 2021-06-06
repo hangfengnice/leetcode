@@ -1,15 +1,15 @@
-var getIntersectionNode = function (headA, headB) {
-  if (!headA || !headB) {
-    return null;
+function fn() {
+  var a = 10;
+
+  function f1() {
+    console.log(a);
   }
 
-  let pa = headA,
-    pb = headB;
-
-  while (pa !== pb) {
-    pa = !pa ? headB : pa.next;
-    pb = !pb ? headA : pb.next;
+  function f2() {
+    console.log("f2");
   }
 
-  return pa;
-};
+  f2();
+}
+
+fn();
