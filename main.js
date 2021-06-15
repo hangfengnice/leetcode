@@ -1,12 +1,25 @@
-var numSquares = function (n) {
-  const f = new Array(n + 1).fill(0);
+var peakIndexInMountainArray = function (arr) {
+  const n = arr.length;
 
-  for (let i = 1; i <= n; i++) {
-    let min = n;
-    for (let j = 1; j * j <= i; j++) {
-      min = Math.min(min, f[i - j * j]);
+  let left = 1,
+    right = n - 2;
+
+  while (left <= right) {
+    let mid = ((right - left) >> 1) + left;
+    console.log(mid, 'mid');
+
+    if (arr[mid] > arr[mid + 1]) {
+      if (mid === 0 || arr[mid - 1] < arr[mid]) {
+        return mid;
+      } else {
+        right = mid - 1;
+      }
+    } else {
+      left = mid + 1;
     }
-    f[i] = min + 1;
   }
-  return f[n];
 };
+
+let res = peakIndexInMountainArray([0, 1, 0]);
+
+console.log(res, "res");
