@@ -1,25 +1,11 @@
-var peakIndexInMountainArray = function (arr) {
-  const n = arr.length;
-
-  let left = 1,
-    right = n - 2;
-
-  while (left <= right) {
-    let mid = ((right - left) >> 1) + left;
-    console.log(mid, 'mid');
-
-    if (arr[mid] > arr[mid + 1]) {
-      if (mid === 0 || arr[mid - 1] < arr[mid]) {
-        return mid;
-      } else {
-        right = mid - 1;
-      }
-    } else {
-      left = mid + 1;
+var generate = function (numRows) {
+  const ret = [];
+  for (let i = 0; i < numRows; i++) {
+    const row = new Array(i + 1).fill(1);
+    for (let j = 1; j < row.length - 1; j++) {
+      row[j] = ret[i - 1][j - 1] + ret[i - 1][j];
     }
+    ret.push(row);
   }
+  return ret;
 };
-
-let res = peakIndexInMountainArray([0, 1, 0]);
-
-console.log(res, "res");
