@@ -1,52 +1,42 @@
-var permutation = function (s) {
-  const ret = []
-  const n = s.length
+var findDiagonalOrder = function (matrix) {
+  if (matrix === null || matrix.length === 0) return [];
 
-  const arr = Array.from(s).sort()
+  let N = matrix.length;
+  let M = matrix[0].length;
 
-  do {
-    ret.push(arr.join(''))
-  } while(nextPermutation(arr))
+  let row = 0,
+    column = 0;
+  let direction = 1;
+  let result = [];
+  let r = 0;
 
-  return ret
+  while (row < N && column < M) {
+    result[r++] = matrix[N][M];
 
+    let new_row = row + (direction === 1 ? -1 : 1);
+    let new_column = column + (direction === 1 ? 1 : -1);
 
-  function nextPermutation(arr) {
-    let i = n - 2
-
-    while(i >= 0 && arr[i] >= arr[i + 1]) {
-      i --
-    }
-    if (i < 0) {
-      return false
-    }
-
-    let j = n - 1
-    while(j >= 0 && arr[i] >= arr[j]) {
-      j --
-    }
-    swap(arr, i, j)
-    reverse(arr, i + 1)
-    return true
-  }
-
-  function swap(arr, i, j) {
-    let temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
-  }
-
-  function reverse(arr, start) {
-    let l = start, r = n - 1
-    while(l < r) {
-      swap(arr, l, r)
-      l ++
-      r --
+    if (new_row < 0 || new_row === N || new_column < 0 || new_column === M) {
+      if (direction === 1) {
+        row += column === M - 1 ? 1 : 0;
+        column += column < M - 1 ? 1 : 0;
+      } else {
+        column += row === N - 1 ? 1 : 0;
+        row += row < N - 1 ? 1 : 0;
+      }
+      direction = 1 - direction;
+    } else {
+      row = new_row;
+      column = new_column;
     }
   }
+  return result;
 };
 
+let res = findDiagonalOrder([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+]);
 
-let res = permutation('aab')
-
-console.log(res, 'res');
+console.log(res, "res");
