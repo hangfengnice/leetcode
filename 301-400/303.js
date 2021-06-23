@@ -21,7 +21,6 @@ var NumArray = function (nums) {
 NumArray.prototype.sumRange = function (left, right) {
   return this.preSum[right + 1] - this.preSum[left];
 };
-
 /**
  * Your NumArray object will be instantiated and called as such:
  * var obj = new NumArray(nums)

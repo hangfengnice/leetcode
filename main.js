@@ -1,42 +1,16 @@
-var findDiagonalOrder = function (matrix) {
-  if (matrix === null || matrix.length === 0) return [];
+var productExceptSelf = function (nums) {
+  let length = nums.length;
+  let answer = [1];
 
-  let N = matrix.length;
-  let M = matrix[0].length;
-
-  let row = 0,
-    column = 0;
-  let direction = 1;
-  let result = [];
-  let r = 0;
-
-  while (row < N && column < M) {
-    result[r++] = matrix[N][M];
-
-    let new_row = row + (direction === 1 ? -1 : 1);
-    let new_column = column + (direction === 1 ? 1 : -1);
-
-    if (new_row < 0 || new_row === N || new_column < 0 || new_column === M) {
-      if (direction === 1) {
-        row += column === M - 1 ? 1 : 0;
-        column += column < M - 1 ? 1 : 0;
-      } else {
-        column += row === N - 1 ? 1 : 0;
-        row += row < N - 1 ? 1 : 0;
-      }
-      direction = 1 - direction;
-    } else {
-      row = new_row;
-      column = new_column;
-    }
+  for (let i = 1; i < length; i++) {
+    answer[i] = answer[i - 1] * nums[i - 1];
   }
-  return result;
+
+  let R = 1;
+  for (let i = length - 1; i >= 0; i--) {
+    answer[i] = answer[i] * R;
+
+    R = R * nums[i];
+  }
+  return answer;
 };
-
-let res = findDiagonalOrder([
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-]);
-
-console.log(res, "res");
