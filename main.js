@@ -1,16 +1,19 @@
-var productExceptSelf = function (nums) {
-  let length = nums.length;
-  let answer = [1];
+var removeNthFromEnd = function(head, n) {
+  let dummy = new ListNode()
+  dummy.next = head
+  let fast = dummy
+  let slow = dummy
 
-  for (let i = 1; i < length; i++) {
-    answer[i] = answer[i - 1] * nums[i - 1];
+
+  for(let i = 0; i < n; i ++) {
+    fast = fast.next
   }
 
-  let R = 1;
-  for (let i = length - 1; i >= 0; i--) {
-    answer[i] = answer[i] * R;
-
-    R = R * nums[i];
+  while(fast.next) {
+    fast = fast.next
+    slow = slow.next
   }
-  return answer;
+  slow.next = slow.next.next
+
+
 };
