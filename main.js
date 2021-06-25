@@ -1,38 +1,68 @@
-var exclusiveTime = function (n, logs) {
-  let stack = [];
-  let res = new Array(n).fill(0);
+function getSequence(arr) {
+  debugger
+  const p = arr.slice();
 
-  let s = logs[0].split(":");
+  const result = [0];
 
-  stack.push(parseInt(s[0]));
+  let i, j, u, v, c;
 
-  let i = 1
-  let prev = parseInt(s[2]);
+  const len = arr.length;
 
-  while (i < logs.length) {
-    s = logs[i].split(":");
-    if (s[1] === "start") {
-      if (stack.length) {
-        res[stack[stack.length - 1]] += parseInt(s[2]) - prev;
+  for (i = 0; i < len; i++) {
+    const arrI = arr[i];
+
+    if (arrI !== 0) {
+      j = result[result.length - 1];
+
+      if (arr[j] < arrI) {
+        // 存储在 result 更新前的最后一个索引的值
+
+        p[i] = j;
+
+        result.push(i);
+
+        continue;
       }
-      stack.push(parseInt(s[0]));
-      prev = parseInt(s[2]);
-    } else {
-      let index = stack[stack.length - 1]
-      let result = parseInt(s[2]) - prev + 1;
-      let val = res[index]
-      res[index] = val + result
-      stack.pop();
-      prev = parseInt(s[2]) + 1;
+
+      u = 0;
+
+      v = result.length - 1;
+
+      // 二分搜索，查找比 arrI 小的节点，更新 result 的值
+
+      while (u < v) {
+        c = ((u + v) / 2) | 0;
+
+        if (arr[result[c]] < arrI) {
+          u = c + 1;
+        } else {
+          v = c;
+        }
+      }
+
+      if (arrI < arr[result[u]]) {
+        if (u > 0) {
+          p[i] = result[u - 1];
+        }
+
+        result[u] = i;
+      }
     }
-    i++;
   }
-  return res;
-};
 
-let res = exclusiveTime(
-  1,
-["0:start:0","0:start:1","0:start:2","0:end:3","0:end:4","0:end:5"]
-);
+  u = result.length;
 
-console.log(res, "res");
+  v = result[u - 1];
+
+  // 回溯数组 p，找到最终的索引
+
+  while (u-- > 0) {
+    result[u] = v;
+
+    v = p[v];
+  }
+
+  return result;
+}
+
+let res = getSequence([2, 1, 5, 3, 6, 4, 8, 9, 7]);
