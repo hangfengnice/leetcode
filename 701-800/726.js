@@ -23,7 +23,6 @@ var countOfAtoms = function (formula) {
       topMap.set(atom, (topMap.get(atom) || 0) + num);
     }
   }
-  console.log(stack, 'stack');
   let map = stack.pop();
   map = Array.from(map);
 
@@ -54,12 +53,8 @@ var countOfAtoms = function (formula) {
     }
     let num = 0;
     while (i < n && !Number.isNaN(Number(formula[i]))) {
-      num = formula[i ++] - 0 + num * 10;
+      num = formula[i] - 0 + num * 10;
     }
     return num;
   }
 };
-
-let res = countOfAtoms('Mg(OH)2')
-
-console.log(res)
