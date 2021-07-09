@@ -23,7 +23,6 @@ var countOfAtoms = function (formula) {
       topMap.set(atom, (topMap.get(atom) || 0) + num);
     }
   }
-  console.log(stack, 'stack');
   let map = stack.pop();
   map = Array.from(map);
 
