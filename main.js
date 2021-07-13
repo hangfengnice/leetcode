@@ -1,22 +1,14 @@
-var majorityElement = function (nums) {
-  let candidate = -1;
-  let count = 0;
-  for (const num of nums) {
-    if (count === 0) {
-      candidate = num;
-    }
-    if (num === candidate) {
-      count++;
+var hIndex = function (citations) {
+  let n = citations.length;
+  const left = 0,
+    right = n - 1;
+  while (left <= right) {
+    const mid = ~~(right - left) / 2 + left;
+    if (citations[mid] >= n - mid) {
+      right = mid - 1;
     } else {
-      count--;
+      left = mid + 1;
     }
   }
-  count = 0;
-  let length = nums.length;
-  for (const num of nums) {
-    if (num === candidate) {
-      count++;
-    }
-  }
-  return count * 2 > length ? candidate : -1;
+  return n - left;
 };
