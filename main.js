@@ -1,29 +1,38 @@
-var maximumElementAfterDecrementingAndRearranging = function (arr) {
-  const n = arr.length;
-  arr.sort((a, b) => a - b);
+var search = function (nums, target) {
+  let ans = 0;
+  const leftIdx = binarySearch(nums, target, true);
+  const rightIdx = binarySearch(nums, target, false) - 1;
 
-  arr[0] = 1;
-  for (let i = 1; i < n; i++) {
-    arr[i] = Math.min(arr[i], arr[i - 1] + 1);
-  }
-  return arr[n - 1];
-};
-
-var maximumElementAfterDecrementingAndRearranging = function (arr) {
-  const n = arr.length;
-  const cnt = new Array(n + 1).fill(0);
-
-  for (const v of arr) {
-    ++cnt[Math.min(v, n)];
+  if (
+    leftIdx <= rightIdx &&
+    rightIdx < nums.length &&
+    nums[leftIdx] === target &&
+    nums[rightIdx] === target
+  ) {
+    ans = rightIdx - leftIdx + 1;
   }
 
-  let miss = 0;
-  for (let i = 1; i <= n; i++) {
-    if (cnt[i] === 0) {
-      miss++;
-    } else {
-      miss -= Math.min(cnt[i] - 1, miss);
+  return ans;
+
+  function binarySearch(nums, target, lower) {
+    let left = 0,
+      right = nums.length - 1,
+      ans = nums.length;
+
+    while (left <= right) {
+      const mid = Math.floor((right + left) / 2);
+
+      if (nums[mid] > target || (lower && nums[mid] >= target)) {
+        right = mid - 1;
+        ans = mid;
+      } else {
+        left = mid + 1;
+      }
     }
+    return ans;
   }
-  return n - miss;
 };
+
+let res = search([5,7,7,8,8,10], 8)
+
+console.log(res, 'res')
