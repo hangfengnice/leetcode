@@ -1,23 +1,17 @@
-var copyRandomList = function (head, cachedNode = new Map()) {
-  if (head === null) {
-    return null;
-  }
-  for (let node = head; node !== null; node = node.next.next) {
-    const nodeNew = new Node(node.val, node.next, null);
-    node.next = nodeNew;
-  }
+var maxSubArray = function (nums) {
+  let pre = 0,
+    maxAns = nums[0];
 
-  for (let node = head; node !== null; node = node.next.next) {
-    const nodeNew = node.next;
-    nodeNew.random = node.random !== null ? node.random.next : null;
-  }
-  const headNew = head.next;
+  nums.forEach((x) => {
+    pre = Math.max(pre + x, x);
 
-  for (let node = head; node !== null; node = node.next) {
-    const nodeNew = node.next;
-    node.next = node.next.next;
-    nodeNew.next = nodeNew.next !== null ? nodeNew.next.next : null;
-  }
+    maxAns = Math.max(maxAns, pre);
+    console.log(pre, x, maxAns, "pre, x, maxAns");
+  });
 
-  return headNew;
+  return maxAns;
 };
+
+let res = maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+
+console.log(res, "res");
