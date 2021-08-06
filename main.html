@@ -6,20 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .circle {
-      display: flex;
-      width: 20px;
-      height: 20px;
-      justify-content: center;
-      align-items: center;
+    .fixed1 {
       background-color: red;
-      color: #fff;
-      border-radius: 50%;
-
+      top: 10;
+      position: fixed;
+    }
+    .fixed2 {
+      padding: 20px;
+    }
+    .fixed3 {
+      position: fixed;
     }
   </style>
 </head>
 <body>
-  <div class="circle">4</div>
+  <div class="fixed1">
+    hello world
+  </div>
+  <div class='fixed2'>
+    hehhh
+    <div class="fixed3">
+      什么东西
+    </div>
+  </div>
+  <div>喝咯world 啥</div>
+
+  <script>
+    setTimeout(function () {
+
+    }, 1000);
+  </script>
 </body>
 </html>
