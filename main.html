@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .fixed1 {
-      background-color: red;
-      top: 10;
-      position: fixed;
-    }
-    .fixed2 {
-      padding: 20px;
-    }
-    .fixed3 {
-      position: fixed;
-    }
-  </style>
-</head>
-<body>
-  <div class="fixed1">
-    hello world
-  </div>
-  <div class='fixed2'>
-    hehhh
-    <div class="fixed3">
-      什么东西
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .fixed1 {
+        background-color: red;
+        top: 10;
+        position: fixed;
+      }
+      .fixed2 {
+        padding: 20px;
+      }
+      .fixed3 {
+        position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fixed1">hello world</div>
+    <div class="fixed2">
+      hehhh
+      <div class="fixed3">什么东西</div>
     </div>
-  </div>
-  <div>喝咯world 啥</div>
+    <div>喝咯world 啥</div>
 
-  <script>
-    setTimeout(function () {
+    <script>
+      var longestPalindromeSubseq = function (s) {
+        const n = s.length;
+        const dp = new Array(n).fill(0).map(() => new Array(n).fill(0));
+        debugger
 
-    }, 1000);
-  </script>
-</body>
+        for (let i = n - 1; i >= 0; i--) {
+          dp[i][i] = 1;
+          const c1 = s[i];
+
+          for (let j = i + 1; j < n; j++) {
+            const c2 = s[j];
+
+            if (c1 === c2) {
+              dp[i][j] = dp[i + 1][j - 1] + 2;
+            } else {
+              dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+            }
+          }
+        }
+        return dp[0][n - 1];
+      };
+
+      longestPalindromeSubseq('bbbab')
+
+    </script>
+  </body>
 </html>
