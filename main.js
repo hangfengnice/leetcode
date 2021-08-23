@@ -1,24 +1,21 @@
-var numberOfArithmeticSlices = function (nums) {
-  let n = nums.length;
-
-  if (n === 1) {
-    return 0;
+var reverseStr = function (s, k) {
+  const n = s.length;
+  const arr = Array.from(s);
+  for (let i = 0; i < n; i += 2 * k) {
+    reverse(arr, i, Math.min(i + k, n) - 1);
   }
+  return arr.join("");
 
-  let d = nums[0] - nums[1],
-    t = 0;
-  let ans = 0;
-
-  for (let i = 2; i < n; i++) {
-    if (nums[i - 1] - nums[i] === d) {
-      t++;
-    } else {
-      d = nums[i - 1] - nums[i];
-      t = 0;
+  function reverse(arr, l, r) {
+    while (l < r) {
+      let temp = arr[l];
+      arr[l] = arr[r];
+      arr[r] = temp;
+      l++;
+      r--;
     }
-    ans += t;
   }
-  return ans;
 };
-let res = numberOfArithmeticSlices([1, 2, 3, 4, 5]);
+
+let res = reverseStr("abcdefg", 2);
 console.log(res, "res");
