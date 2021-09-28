@@ -44,3 +44,33 @@ var recoverTree = function (root) {
     }
   }
 };
+
+// 隐式中序遍历
+var recoverTree = function (root) {
+  const stack = [];
+  let x = null,
+    y = null,
+    pred = null;
+
+  while (stack.length || root) {
+    while (root) {
+      stack.push(root);
+      root = root.left;
+    }
+    root = stack.pop();
+
+    if (pred && root.val < pred.val) {
+      y = root;
+      if (x === null) {
+        x = pred;
+      } else {
+        break;
+      }
+    }
+    pred = root;
+    root = root.right;
+  }
+  let temp = x.val;
+  x.val = y.val;
+  y.val = temp;
+};
