@@ -1,12 +1,4 @@
-var kthSmallest = function (root, k) {
-  let stack = [];
-  while (true) {
-    while (root) {
-      stack.push(root);
-      root = root.left;
-    }
-    let node = stack.pop();
-    if (--k === 0) return node.val;
-    root = node.right;
-  }
+var countNodes = function (root) {
+  if (!root) return 0;
+  return 1 + countNodes(root.left) + countNodes(root.right);
 };
