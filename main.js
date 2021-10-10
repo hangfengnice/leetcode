@@ -1,18 +1,23 @@
-var longestCommonSubsequence = function (text1, text2) {
-  let n = text1.length,
-    m = text2.length;
-  let dp = new Array(n + 1).fill(0).map(() => new Array(m + 1).fill(0));
+var canPartition = function (nums) {
+  let n = nums.length;
+  if (n < 2) return false;
+  let sum = 0,
+    maxNum = 0;
+  for (let num of nums) {
+    sum += num;
+    maxNum = Math.max(maxNum, num);
+  }
 
-  for (let i = 1; i <= n; i++) {
-    let c1 = text1[i - 1];
-    for (let j = 1; j <= m; j++) {
-      let c2 = text2[j - 1];
-      if (c1 === c2) {
-        dp[i][j] = dp[i - 1][j - 1] + 1;
-      } else {
-        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-      }
+  if (sum & 1 || maxNum > sum / 2) return false;
+
+  let target = sum / 2;
+
+  let dp = new Array(target + 1).fill(false);
+  dp[0] = true;
+  for (let num of nums) {
+    for (let i = target; i >= num; i--) {
+      dp[i] |= dp[i - num];
     }
   }
-  return dp[n][m];
+  return dp[target];
 };
