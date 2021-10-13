@@ -1,23 +1,33 @@
-var minPathSum = function (grid) {
-  let m = grid.length;
-  let n = grid[0].length;
-  let dp = new Array(m).fill(0).map(() => new Array(n).fill(0));
-  dp[0][0] = grid[0][0];
-  for (let i = 1; i < m; i++) {
-    dp[0][i] = dp[0][i - 1] + grid[0][i];
-  }
-  for (let i = 1; i < n; i++) {
-    dp[i][0] = dp[i - 1][0] + grid[i][0];
-  }
-  console.log(dp, 'dp');
+var solveNQueens = function (n) {
+  let ans = [];
+  let dp = new Array(n).fill(0).map(() => new Array(n).fill("."));
 
-  for (let i = 1; i < m; i++) {
-    for (let j = 1; j < n; j++) {
-      dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+  dfs(dp, 0);
+  return ans;
+
+  function dfs(dp, row) {
+    if (row === n) {
+      return ans.push(dp.map((r) => r.join("")));
+    }
+
+    for (let col = 0; col < n; col++) {
+      if (isValid(dp, row, col)) {
+        dp[row][col] = "Q";
+        dfs(dp, row + 1);
+        dp[row][col] = ".";
+      }
     }
   }
-  return dp[m - 1][n - 1];
+  function isValid(dp, row, col) {
+    for (let i = 0; i < row; i++) {
+      if (dp[i][col] === "Q") return false;
+    }
+    for (let i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
+      if (dp[i][j] === "Q") return false;
+    }
+    for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+      if (dp[i][j] === "Q") return false;
+    }
+    return true;
+  }
 };
-
-let res = minPathSum([[1,3,1],[1,5,1],[4,2,1]])
-console.log(res, 'res');
