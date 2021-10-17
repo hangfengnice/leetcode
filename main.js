@@ -1,33 +1,32 @@
-var solveNQueens = function (n) {
-  let ans = [];
-  let dp = new Array(n).fill(0).map(() => new Array(n).fill("."));
-
-  dfs(dp, 0);
-  return ans;
-
-  function dfs(dp, row) {
-    if (row === n) {
-      return ans.push(dp.map((r) => r.join("")));
+var merge = function (intervals) {
+  intervals.sort((a, b) => {
+    if (a[0] === b[0]) {
+      return b[1] - a[1];
     }
+    return a[0] - b[0];
+  });
+  let res = [];
+  let [l, r] = intervals[0];
 
-    for (let col = 0; col < n; col++) {
-      if (isValid(dp, row, col)) {
-        dp[row][col] = "Q";
-        dfs(dp, row + 1);
-        dp[row][col] = ".";
-      }
+  let n = intervals.length;
+  for (let i = 1; i < n; i++) {
+    let [curl, curr] = intervals[i];
+    if (curl > r) {
+      res.push([l, r]);
+      l = curl;
+      r = curr;
+    } else if (curl >= l && curr > r) {
+      r = curr;
     }
   }
-  function isValid(dp, row, col) {
-    for (let i = 0; i < row; i++) {
-      if (dp[i][col] === "Q") return false;
-    }
-    for (let i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
-      if (dp[i][j] === "Q") return false;
-    }
-    for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
-      if (dp[i][j] === "Q") return false;
-    }
-    return true;
-  }
+  res.push([l , r])
+  return res;
 };
+
+let res = merge([
+  [1, 3],
+  [2, 6],
+  [8, 10],
+  [15, 18],
+]);
+console.log(res, "res");
