@@ -1,53 +1,19 @@
-var Trie = function() {
-  this.children = {}
-};
+var countingSort = function (arr, n) {
+  if (n <= 1) return
 
-/**
- * @param {string} word
- * @return {void}
- */
-Trie.prototype.insert = function(word) {
-  let node = this.children
-  for(let ch of word) {
-    if (!node[ch]) {
-      node[ch] = {}
-    }
-    node = node[ch]
-  }
-  node.isEnd = true
-};
+  let max = Math.max(...arr)
 
-Trie.prototype.searchPrefix = function (word) {
-  let node = this.children
-  for(let ch of word) {
-    if (!node[ch]) return false
-    node = node[ch]
+  let c = new Array(max + 1).fill(0)
+  for(let i = 0; i < n; i ++) {
+    c[arr[i]] ++
   }
-  return node
+
+  let r = []
+
+  for(let i = n - 1; i >= 0; i -- ) {
+    let index = c[arr[i]] - 1
+    r[index] = arr[i]
+    c[arr[i]] --
+  }
+
 }
-
-
-/**
- * @param {string} word
- * @return {boolean}
- */
-Trie.prototype.search = function(word) {
-  let node = this.searchPrefix(word)
-  return node && node.isEnd
-};
-
-/**
- * @param {string} prefix
- * @return {boolean}
- */
-Trie.prototype.startsWith = function(prefix) {
-  return this.searchPrefix(prefix)
-};
-
-/**
- * Your Trie object will be instantiated and called as such:
- * var obj = new Trie()
- * obj.insert(word)
- * var param_2 = obj.search(word)
- * var param_3 = obj.startsWith(prefix)
- */
