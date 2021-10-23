@@ -33,7 +33,9 @@ var majorityElement = function (nums) {
   }
 
   const ans = [];
-  let flag = (nums.length / 3) >> 1;
+  let flag = (nums.length / 3) >> 0;
+
+
   if (vote1 > 0 && cnt1 > flag) {
     ans.push(element1);
   }
