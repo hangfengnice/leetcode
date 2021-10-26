@@ -1,39 +1,42 @@
-var isPalindrome = function (head) {
-  if (!head) return true;
-  const firstHalfEnd = endOfFirstHalf(head);
-  const secondHalfStart = reverseList(firstHalfEnd.next);
+// var insertionSortList = function (head) {
+//   if (!head) return head;
+//   let dummy = new ListNode(-1, head);
+//   let lastSorted = head,
+//     cur = head.next;
+//   while (cur) {
+//     if (lastSorted.val <= cur.val) {
+//       lastSorted = lastSorted.next;
+//     } else {
+//       let prev = dummy;
+//       while (prev.next.val <= cur.val) {
+//         prev = prev.next;
+//       }
+//       lastSorted.next = cur.next;
+//       cur.next = prev.next;
+//       prev.next = cur;
+//     }
+//     cur = lastSorted.next;
+//   }
+//   return dummy.next;
+// };
 
-  let p1 = head;
-  let p2 = secondHalfStart;
-
-  let result = true;
-  while (result && p2) {
-    if (p1.val !== p2.val) result = false;
-    p1 = p1.next;
-    p2 = p2.next;
+var copyRandomList = function (head) {
+  if (!head) {
+    return null;
   }
-  firstHalfEnd.next = reverseList(secondHalfStart);
-  return result;
 
-  function endOfFirstHalf(head) {
-    let fast = head;
-    let slow = head;
-    while (fast.next && fast.next.next) {
-      fast = fast.next.next;
-      slow = slow.next;
-    }
-    return slow;
+  let map = new map();
+  let cur = head;
+  while (cur) {
+    map.set(cur, { val: cur.val });
+    cur = cur.next;
   }
 
-  function reverseList(head) {
-    let prev = null;
-    let cur = head;
-    while (cur) {
-      let next = cur.next;
-      cur.next = prev;
-      prev = cur;
-      cur = next;
-    }
-    return prev;
+  let cur = head;
+  while (cur) {
+    map.get(cur).next = map.get(cur.next);
+    map.get(cur).random = map.get(cur.random);
+    cur = cur.next;
   }
+  return map.get(head);
 };

@@ -61,5 +61,21 @@ var reverseBetween = function(head, left, right) {
 
 };
 
+// 递归
 
+let i = 0
+var reverseBetween = function (head, left, right) {
+  i ++
+  if (i === right) return head
 
+  if (i < left) {
+    head.next = reverseBetween(head.next, left, right)
+    return head
+  } else {
+    let node = reverseBetween(head.next, left)
+    let nex = head.next.next
+    head.next.next = head
+    head.next = nex
+    return node
+  }
+}

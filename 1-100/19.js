@@ -15,3 +15,9 @@ var removeNthFromEnd = function(head, n) {
   slow.next = slow.next.next
   return dummy.next
 };
+
+// 方法一：计算链表长度
+
+// 方法二：栈
+
+// 方法三：双指针
