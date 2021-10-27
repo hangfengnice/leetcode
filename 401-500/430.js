@@ -28,3 +28,27 @@ var flatten = function (head) {
 
   return pseudoHead.next;
 };
+
+// 栈解
+var flatten = function (head) {
+  let node = head;
+  let prev = null;
+  let stack = [];
+
+  while (node || stack.length) {
+    if (node === null) {
+      node = stack.pop();
+      node.prev = prev;
+      prev.next = node;
+    }
+    if (node.child !== null) {
+      if (node.next !== null) stack.push(node.next);
+      node.child.prev = node;
+      node.next = node.child;
+      node.child = null;
+    }
+    prev = node;
+    node = node.next;
+  }
+  return head;
+};
