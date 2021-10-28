@@ -1,14 +1,17 @@
-var finalPrices = function (prices) {
+var trap = function (height) {
+  let ans = 0;
   let stack = [];
-  let res = prices.slice();
-  for (let i = 0; i < prices.length - 1; i++) {
-    while (stack.length && prices[i] <= prices[stack.length - 1]) {
-      res[stack[stack.length - 1]] =
-        prices[stack[stack.length - 1]] - prices[i];
-      stack.pop();
-    }
+  for (let i = 0; i < height.length; i++) {
+    while (stack.length && height[i] > height[stack[stack.length - 1]]) {
+      let top = stack.pop();
+      if (!stack.length) break;
 
+      let width = i - stack[stack.length - 1] - 1;
+      let height =
+        Math.min(height[i], height[stack[stack.length - 1]]) - height[top];
+      ans += width * height;
+    }
     stack.push(i);
   }
-  return res;
+  return ans;
 };
