@@ -1,11 +1,11 @@
-let obj = {
-  name: 1
-}
+let a = new Set()
+let b = new Set()
 
-let p = new Proxy(obj, {
-  has(target, key) {
-    console.log(target === obj, key, target);
-  }
-})
+b.add('b')
 
-console.log('name' in p);
+console.log(a, b);
+
+a = b
+b = new Set()
+
+console.log(a, b);
