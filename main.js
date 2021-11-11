@@ -1,37 +1,27 @@
-var maxEnvelopes = function (envelopes) {
-  envelopes.sort((a, b) => {
-    if (a[0] === b[0]) {
-      return b[1] - a[1];
-    }
-    return a[0] - b[0];
-  });
+var maxSumSubmatrix = function (matrix, k) {
+  let rows = matrix.length,
+    cols = matrix[0].length,
+    max = -Infinity;
 
-  let n = envelopes.length;
+  for (let i1 = 1; i1 <= rows; i1++) {
+    for (let j1 = 1; j1 <= cols; j1++) {
+      let dp = new Array(rows + 1)
+        .fill(0)
+        .map(() => new Array(cols + 1).fill(0));
+      dp[i1][j1] = matrix[i1 - 1][j1 - 1];
 
-  const f = [envelopes[0][1]];
-
-  for (let i = 1; i < n; i++) {
-    const num = envelopes[i][1];
-    if (num > f[f.length - 1]) {
-      f.push(num);
-    } else {
-      const index = binarySearch(f, num);
-      f[index] = num;
-    }
-  }
-  return f.length;
-
-  function binarySearch(f, target) {
-    let low = 0,
-      high = f.length - 1;
-    while (low < high) {
-      const mid = Math.floor((high - low) / 2) + low;
-      if (f[mid] < target) {
-        low = mid + 1;
-      } else {
-        high = mid;
+      for (let i2 = i1; i2 <= rows; i2++) {
+        for (let j2 = j1; j2 <= cols; j2++) {
+          dp[i2][j2] =
+            dp[i2 - 1][j] +
+            dp[i2][j2 - 1] -
+            dp[i2 - 1][j2 - 1] +
+            matrix[i2 - 1][j2 - 1];
+          if (dp[i2][j2] <= k && dp[i2][j2] > max) max = dp[i2][j2];
+          if (dp[i2][j2] === k) return k;
+        }
       }
     }
-    return low;
   }
+  return max;
 };
