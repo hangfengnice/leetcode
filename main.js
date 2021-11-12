@@ -1,21 +1,18 @@
-var lenLongestFibSubseq = function (A) {
-  let N = A.length;
-  let index = new Map();
-  for (let i = 0; i < N; i++) {
-    index.push(A[i], i);
-  }
-  let longest = new Map();
-  let ans = 0;
+var longestValidParentheses = function (s) {
+  let maxans = 0;
+  let len = s.length;
+  let dp = new Array(s.length).fill(0);
 
-  for (let k = 1; k < N; k++) {
-    for (let j = 0; j < k; j++) {
-      let i = index.get(A[k] - A[j]) || -1;
-      if (i >= 0 && i < j) {
-        let cand = (longest.get(i * N + j) || 2) + 1;
-        longest.set(j * N + k, cand);
-        ans = Math.max(ans, cand);
+  for (let i = 1; i < len; i++) {
+    if (s[i] === ")") {
+      if (s[i - 1] === "(") {
+        dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+      } else if (i - dp[i - 1] > 0 && s[i - dp[i - 1] - 1] === "(") {
+        dp[i] =
+          dp[i - 1] + (i - dp[i - 1] >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
       }
+      maxans = Math.max(maxans, dp[i]);
     }
   }
-  return ans >= 3 ? ans : 0;
+  return maxans;
 };
