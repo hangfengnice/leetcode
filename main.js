@@ -1,16 +1,22 @@
-var findTilt = function (root) {
-  if (!root) return 0;
+var Solution = function(nums) {
+  this.nums = nums;
+  this.original = nums.slice();
 
-  let ans = 0;
-  dfs(root);
-  return ans;
+};
 
-  function dfs(node) {
-    if (!node) return 0;
-    const sumLeft = dfs(node.left);
-    const sumRight = dfs(node.right);
+Solution.prototype.reset = function() {
+  this.nums = this.original.slice();
+  return this.nums;
+};
 
-    ans += Math.abs(sumLeft - sumRight);
-    return sumLeft + sumRight + node.val;
+Solution.prototype.shuffle = function() {
+  const shuffled = new Array(this.nums.length).fill(0);
+  const list = [];
+  this.nums.forEach((num) => list.push(num));
+  for (let i = 0; i < this.nums.length; ++i) {
+      const j = Math.random() * list.length;
+      shuffled[i] = list.splice(j, 1);
   }
+  this.nums = shuffled.slice();
+  return this.nums;
 };
