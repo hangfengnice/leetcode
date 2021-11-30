@@ -7,7 +7,7 @@ var Solution = function (m, n) {
   this.n = n;
   this.total = m * n;
   this.map = new Map();
-};
+};v a
 
 /**
  * @return {number[]}
