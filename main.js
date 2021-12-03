@@ -1,12 +1,52 @@
-var kthSmallestPrimeFraction = function (arr, k) {
-  const n = arr.length;
-  const frac = [];
-  for (let i = 0; i < n; i++) {
-    for (let j = (i = 1); j < n; j++) {
-      frac.push([arr[i], arr[j]]);
-    }
-  }
-  frac.sort((a, b) => a[0] * b[1] - b[0] * a[1]);
+function cloneDeep(target, map = new Map()) {
 
-  return frac[k - 1];
-};
+  if (typeof target !== 'object') return target
+
+  if (map.get(target)) {
+    return map.get(target)
+  }
+  const temp = Array.isArray(target) ? [] : {}
+
+  map.set(target, temp)
+  for(const key in target) {
+    temp[key] =  cloneDeep(target[key], map)
+  }
+  return temp
+}
+
+// // let arr = [1, 2, 3, 4]
+
+// // for(let key in arr) {
+// //   console.log(key, 'key')
+// // }
+
+
+// let arrow = () => {console.log('yes')}
+
+// let other = eval(arrow.toString())
+// other()
+
+// let s = Symbol('1')
+
+
+
+// let o = Object(Symbol.prototype.valueOf.call(s))
+
+// console.log(o, o === s, 'o')
+
+// console.log(Object(s), s)
+
+let obj = {
+  name: 1
+}
+
+let obj1 = Object(obj)
+
+console.log(obj1 === obj, 'obj')
+
+let s = Symbol(1)
+
+
+let s2 = Object(s)
+
+console.log(s === s2)
