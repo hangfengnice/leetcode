@@ -1,18 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <script>
-    console.log(a)
-    console.log(1)
-  </script>
-  <script>
-    console.log(3)
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border: 1px solid #eee;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">The table header</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>The table body</td>
+          <td>with two columns</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <script src="main.js"></script> -->
+    <script>
+      let target
+      const data = {
+        name: "霍春阳",
+        age: 24,
+      };
+
+      function $watch(exp, fn) {
+        Target = fn;
+        let pathArr,
+          obj = data;
+        // 检查 exp 中是否包含 .
+        if (typeof exp === 'function') {
+          exp()
+          Target = null
+          return
+        }
+        if (/\./.test(exp)) {
+          // 将字符串转为数组，例：'a.b' => ['a', 'b']
+          pathArr = exp.split(".");
+          // 使用循环读取到 data.a.b
+          pathArr.forEach((p) => {
+            obj = obj[p];
+          });
+          return;
+        }
+        data[exp];
+        Target = null;
+      }
+      function walk(data) {
+        for (let key in data) {
+          const dep = [];
+          let val = data[key];
+          // 如果 val 是对象，递归调用 walk 函数将其转为访问器属性
+          const nativeString = Object.prototype.toString.call(val);
+          if (nativeString === "[object Object]") {
+            walk(val);
+          }
+          Object.defineProperty(data, key, {
+            set(newVal) {
+              if (newVal === val) return;
+              val = newVal;
+              console.log(dep, 'dep')
+              dep.forEach((fn) => fn());
+            },
+            get() {
+              dep.push(Target);
+              return val;
+            },
+          });
+        }
+      }
+
+      walk(data);
+
+      function render() {
+        return document.write(`姓名：${data.name}; 年龄：${data.age}`);
+      }
+      $watch(render, render);
+
+      // data.b = 'aaaa'
+
+      let person = {
+
+      }
+      Object.defineProperty(person, 'name', {
+        value: '1'
+      })
+      console.log(Object.getOwnPropertyDescriptor(person, 'name'))
+    </script>
+  </body>
 </html>
