@@ -1,11 +1,36 @@
-let deps = []
-let newDeps = [1, 2]
-let depIds = new Set()
-let newDepIds = new Set()
-
-
-deps = newDeps
-
-newDeps.length = 0
-
-console.log(deps, 'deps');
+bidFlag: null
+brandId: null
+brandName: null
+buyer: "li-xuan"
+buyerUserName: "li-xuan"
+commonId: "22"
+companyCd: "2210"
+documentId: null
+documentName: null
+id: "4145043"
+inMyCart: null
+invControl: null
+isContract: "Y"
+isFrameContract: "Y"
+itemCd: "10002858"
+itemDesc: "GSM宏基站(BTS)配件\\/主设备\\/华为\\/宏基站BTS3900 传输扩展单元"
+itemSpec: null
+itemSpecId: null
+materialSource: "供应商"
+mtlNumber: 3
+orderHandler: null
+orderHandlerEmp: null
+poLevel: null
+poType: "一采"
+productName: "10002858,,GSM宏基站(BTS)配件\\/主设备\\/华为\\/宏基站BTS3900 传输扩展单元,"
+productNamee: "GSM基站"
+productNo: "P1201020000157"
+productNoName: "310101001,GSM基站"
+productNoNum: "310101001"
+productNum: "310101001"
+profType: "1"
+purchaseCycle: null
+safeControlFlag: null
+unit: "个"
+unitPrice: null
+vendorPurType: "一采"
