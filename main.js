@@ -3,12 +3,11 @@ brandId: null
 brandName: null
 buyer: "li-xuan"
 buyerUserName: "li-xuan"
-commonId: "22"
+commonId: "11245"
 companyCd: "2210"
 documentId: null
 documentName: null
 id: "4145043"
-inMyCart: null
 invControl: null
 isContract: "Y"
 isFrameContract: "Y"
@@ -17,12 +16,12 @@ itemDesc: "GSM宏基站(BTS)配件\\/主设备\\/华为\\/宏基站BTS3900 传�
 itemSpec: null
 itemSpecId: null
 materialSource: "供应商"
-mtlNumber: 3
+mdMaterialCatType: null
 orderHandler: null
 orderHandlerEmp: null
 poLevel: null
 poType: "一采"
-productName: "10002858,,GSM宏基站(BTS)配件\\/主设备\\/华为\\/宏基站BTS3900 传输扩展单元,"
+productName: "10002858,GSM宏基站(BTS)配件\\/主设备\\/华为\\/宏基站BTS3900 传输扩展单元"
 productNamee: "GSM基站"
 productNo: "P1201020000157"
 productNoName: "310101001,GSM基站"
@@ -31,6 +30,9 @@ productNum: "310101001"
 profType: "1"
 purchaseCycle: null
 safeControlFlag: null
+storageMode: null
+straightFlag: null
 unit: "个"
 unitPrice: null
 vendorPurType: "一采"
+ypzFlag: null
