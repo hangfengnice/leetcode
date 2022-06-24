@@ -1,3 +1,42 @@
-@风萧萧归尘 模板库的服务考核和合同模板附件下载也是调用http://47.111.147.70:3000/project/58/interface/api/16147
-飞扬  09:41:54
-第3种的采购方案标准化模板下载就是评分标准导出，调用的是http://47.111.147.70:3000/project/58/interface/api/16156
+var findSubstring = function (s, words) {
+  const res = [];
+  const m = words.length,
+    n = words[0].length,
+    ls = s.length;
+
+  for (let i = 0; i < n; i++) {
+    if (i + m * n > ls) break;
+
+    const differ = new Map();
+    for (let j = 0; j < m; j++) {
+      const word = s.substring(i + j * n, i + (j + 1) * n);
+      differ.set(word, (differ.get(word) || 0) + 1);
+    }
+
+    for (const word of words) {
+      differ.set(word, (differ.get(word) || 0) - 1);
+      if (differ.get(word) === 0) {
+        differ.delete(word);
+      }
+    }
+
+    for (let start = i; start < ls - m * n + 1; start += n) {
+      if (start !== i) {
+        let word = s.substring(start + (m - 1) * n, start + m * n);
+        differ.set(word, (differ.get(word) || 0) + 1);
+        if (differ.get(word) === 0) {
+          differ.delete(word);
+        }
+        word = s.substring(start - n, start);
+        differ.set(word, (differ.get(word) || 0) - 1);
+        if (differ.get(word) === 0) {
+          differ.delete(word);
+        }
+      }
+      if (differ.size === 0) {
+        res.push(start);
+      }
+    }
+  }
+  return res;
+};
