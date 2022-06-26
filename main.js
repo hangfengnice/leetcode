@@ -1,42 +1,18 @@
-var findSubstring = function (s, words) {
-  const res = [];
-  const m = words.length,
-    n = words[0].length,
-    ls = s.length;
+var minCost = function (costs) {
+  const n = costs.length
+  let dp = []
+  for(let i = 0; i < 3; i ++) {
+    dp[i] = costs[0][i]
+  }
 
-  for (let i = 0; i < n; i++) {
-    if (i + m * n > ls) break;
+  for(let i = 1; i < n; i ++) {
+    const dpNew = new Array(3).fill(0)
 
-    const differ = new Map();
-    for (let j = 0; j < m; j++) {
-      const word = s.substring(i + j * n, i + (j + 1) * n);
-      differ.set(word, (differ.get(word) || 0) + 1);
-    }
-
-    for (const word of words) {
-      differ.set(word, (differ.get(word) || 0) - 1);
-      if (differ.get(word) === 0) {
-        differ.delete(word);
-      }
-    }
-
-    for (let start = i; start < ls - m * n + 1; start += n) {
-      if (start !== i) {
-        let word = s.substring(start + (m - 1) * n, start + m * n);
-        differ.set(word, (differ.get(word) || 0) + 1);
-        if (differ.get(word) === 0) {
-          differ.delete(word);
-        }
-        word = s.substring(start - n, start);
-        differ.set(word, (differ.get(word) || 0) - 1);
-        if (differ.get(word) === 0) {
-          differ.delete(word);
-        }
-      }
-      if (differ.size === 0) {
-        res.push(start);
-      }
+    for(let j = 0; j < 3; j ++) {
+      dpNew[j] = Math.min(dp[(j + 1) % 3], dp[(j + 2) % 3]) + costs[i][j]
+      dp = dpNew
     }
   }
-  return res;
-};
+
+  return dp.reduce((a, b) => a > b ? b : a)
+}
