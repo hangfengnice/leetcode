@@ -1,27 +1,14 @@
-/**
- * Encodes a URL to a shortened URL.
- *
- * @param {string} longUrl
- * @return {string}
- */
- let map = new Map()
- let i = 0
- var encode = function (longUrl) {
-     map.set(i, longUrl);
-     return "http://tinyurl.com/" + i++;
- };
+var encode = function (longUrl) {
+  this.dataBase = new Map();
+  this.id = 0;
+  this.id++;
 
- /**
-  * Decodes a shortened URL to its original URL.
-  *
-  * @param {string} shortUrl
-  * @return {string}
-  */
- var decode = function (shortUrl) {
-     return map.get(parseInt(shortUrl.replace("http://tinyurl.com/", "")))
- };
+  this.dataBase.set(this.id, longUrl);
+  return "http://tinyurl.com/" + this.id;
+};
 
- /**
-  * Your functions will be called as such:
-  * decode(encode(url));
-  */
+var decode = function (shortUrl) {
+  const p = shortUrl.lastIndexOf("/") + 1;
+  const key = parseInt(shortUrl.slice(p));
+  return this.dataBase.get(key);
+};
