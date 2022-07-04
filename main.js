@@ -1,69 +1,19 @@
-var diffWaysToCompute = function (expression) {
-  const ADDITION = -1;
-  const SUBTRACTION = -2;
-  const MULTIPLICATION = -3;
-  const ops = [];
-  for (let i = 0; i < expression.length; ) {
-    if (!isDigit(expression[i])) {
-      if (expression[i] === "+") {
-        ops.push(ADDITION);
-      } else if (expression[i] === "-") {
-        ops.push(SUBTRACTION);
-      } else {
-        ops.push(MULTIPLICATION);
-      }
-      i++;
-    } else {
-      let t = 0;
-      while (i < expression.length && isDigit(expression[i])) {
-        t = expression[i] - 0 + t * 10;
-        i++;
-      }
-      ops.push(t);
-    }
-  }
+var minRefuelStops = function (target, startFuel, stations) {
+  const n = stations.length;
+  const dp = new Array(n + 1).fill(0);
+  dp[0] = startFuel;
 
-  const dp = new Array(ops.length)
-    .fill(0)
-    .map(() => new Array(ops.length).fill(0));
-
-  for (let i = 0; i < ops.length; i++) {
-    for (let j = 0; j < ops.length; j++) {
-      dp[i][j] = [];
-    }
-  }
-  return dfs(dp, 0, ops.length - 1, ops);
-
-  function dfs(dp, l, r, ops) {
-    if (dp[l][r].length === 0) {
-      if (l === r) {
-        dp[l][r].push(ops[l]);
-      } else {
-        for (let i = l; i < r; i += 2) {
-          const left = dfs(dp, l, i, ops);
-          const right = dfs(dp, i + 2, r, ops);
-
-          for (let lv of left) {
-            for (let rv of right) {
-              if (ops[i + 1] === ADDITION) {
-                dp[l][r].push(lv + rv);
-              } else if (ops[i + 1] === SUBTRACTION) {
-                dp[l][r].push(lv - rv);
-              } else {
-                dp[l][r].push(lv * rv);
-              }
-            }
-          }
-        }
+  for (let i = 0; i < n; i++) {
+    for (let j = i; j >= 0; j--) {
+      if (dp[j] >= stations[i][0]) {
+        dp[j + 1] = Math.max(dp[j + 1], dp[j] + stations[i][1]);
       }
     }
-    return dp[l][r];
   }
-
-  function isDigit(ch) {
-    return parseFloat(ch).toString() === "NaN" ? false : true;
+  for (let i = 0; i <= n; i++) {
+    if (dp[i] >= target) {
+      return i;
+    }
   }
+  return -1;
 };
-
-let res = diffWaysToCompute("2-1-1");
-console.log(res, 'res');
