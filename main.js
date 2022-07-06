@@ -1,19 +1,23 @@
-var minRefuelStops = function (target, startFuel, stations) {
-  const n = stations.length;
-  const dp = new Array(n + 1).fill(0);
-  dp[0] = startFuel;
+var largestRectangleArea = function (heights) {
+  let n = heights.length;
+  let left = [],
+    right = [];
+  let stack = [];
+  debugger
 
   for (let i = 0; i < n; i++) {
-    for (let j = i; j >= 0; j--) {
-      if (dp[j] >= stations[i][0]) {
-        dp[j + 1] = Math.max(dp[j + 1], dp[j] + stations[i][1]);
-      }
+    while (stack.length && heights[stack[stack.length - 1]] >= heights[i]) {
+      right[stack[stack.length - 1]] = i;
+      stack.pop();
     }
+    left[i] = !stack.length ? -1 : stack[stack.length - 1];
+    stack.push(i);
   }
-  for (let i = 0; i <= n; i++) {
-    if (dp[i] >= target) {
-      return i;
-    }
+  let ans = 0;
+  for (let i = 0; i < n; i++) {
+    ans = Math.max(ans, (right[i] - left[i] - 1) * heights[i]);
   }
-  return -1;
+  return ans;
 };
+
+largestRectangleArea([6, 7, 5, 2, 4, 5, 9, 3]);
