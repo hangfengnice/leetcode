@@ -1,54 +1,26 @@
-var rootCount = function (edges, guesses, k) {
-  const n = edges.length + 1
+var validPartition = function (nums) {
+  const n = nums.length
 
-  const g = new Array(n).fill(0).map(() => [])
+  const dp = new Array(n + 1).fill(false)
 
-  const st = new Set()
+  dp[0] = true
 
-  const h = (x, y) => {
-    return (x << 20) | y
-  }
+  for (let i = 2; i <= n; i++) {
+    if (i >= 2) {
+      dp[i] = dp[i - 2] && nums[i - 2] === nums[i - 1]
+    }
 
-  edges.forEach((v) => {
-    g[v[0]].push(v[1])
-    g[v[1]].push(v[0])
-  })
-
-  guesses.forEach((v) => {
-    st.add(h(v[0], v[1]))
-  })
-
-  let cnt = 0
-  let res = 0
-
-  dfs(0, -1)
-  redfs(0, -1, cnt)
-
-  return res
-
-  function dfs(x, fat) {
-    for (const y of g[x]) {
-      if (y == fat) {
-        continue
-      }
-
-      cnt += st.has(h(x, y))
-
-      dfs(y, x)
+    if (i >= 3) {
+      dp[i] =
+        dp[i] ||
+        (dp[i - 3] && validThree(nums[i - 3], nums[i - 2], nums[i - 1]))
     }
   }
+  return dp[n]
 
-  function redfs(x, fat, cnt) {
-    if (cnt >= k) {
-      res++
-    }
-
-    for (let y of g[x]) {
-      if (y == fat) {
-        continue
-      }
-
-      redfs(y, x, cnt - st.has(h(x, y)) + st.has(h(y, x)))
-    }
+  function validThree(num1, num2, num3) {
+    return (
+      (num1 == num2 && num1 == num3) || (num1 + 1 === num2 && num2 + 1 == num3)
+    )
   }
 }
