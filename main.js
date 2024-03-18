@@ -1,52 +1,34 @@
-let data = {
-  id: 'b8574ee4-aa93-4898-8732-622789e740f9',
-  tenantId: '3',
-  tenantName: '浙江移动',
-  sysId: '6',
-  sysName: null,
-  accountId: '6',
-  accountName: '浙江移动人力系统通用版',
-  companyCd: '2210',
-  companyName: '浙江移动省公司',
-  billType: '支援确认单',
-  billNo: '1710213864408',
-  billName: '【PDS测试项目】需要叶勇支援，请确认是否同意参加',
-  submitUserName: 'zhaoxinc',
-  submitFullName: '赵欣晨',
-  submitDatetime: '2024-03-12',
-  applyId: '171021386440820240312112425983',
-  piid: '31849818437740d7814f8bc657b9bc7f',
-  flowStartUserName: null,
-  flowStartFullName: null,
-  nodeId: 'node2',
-  flowNodeName: '支援人确认',
-  handlerUrl:
-    '/depart/department-budget/department-budget-breakdown-review?applyId={applyId}',
-  handlerShowType: null,
-  handlerUserName: 'yeyong1',
-  handlerFullName: '叶勇',
-  sourceSystemCode: null,
-  deleteFlag: '0',
-  effectiveDatetime: null,
-  expirationDatetime: null,
-  notes: null,
-  insertUserName: 'zhaoxinc',
-  insertFullName: null,
-  insertProgramCd: null,
-  insertDatetime: 1710213867000,
-  updateUserName: 'zhaoxinc',
-  updateFullName: null,
-  updateProgramCd: null,
-  updateDatetime: 1710213867000,
-  attr1: null,
-  attr2: null,
-  attr3: null,
-  attr4: null,
-  attr5: null,
-  attr6: null,
-  attr7: null,
-  attr8: null,
-  attr9: null,
-  attr10: null,
-  taskId: '2d87d17340c549479f74f69b6883b970',
+var sellingWood = function (m, n, prices) {
+  const value = new Map()
+
+  const meno = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(-1))
+
+  for (const price of prices) {
+    value.set(pairHash(price[0], price[1]), price[2])
+  }
+
+  function pairHash(x, y) {
+    return (x << 16) ^ y
+  }
+  return dfs(m, n)
+
+  function dfs(x, y) {
+    if (meno[x][y] != -1) {
+      return meno[x][y]
+    }
+
+    let ret = value.has(pairHash(x, y)) ? value.get(pairHash(x, y)) : 0
+    if (x > 1) {
+      for (let i = 1; i < x; i++) {
+        ret = Math.max(ret, dfs(i, y) + dfs(x - i, y))
+      }
+    }
+    if (y > 1) {
+      for (let j = 1; j < y; j++) {
+        ret = Math.max(ret, dfs(x, j) + dfs(x, y - j))
+      }
+    }
+    memo[x][y] = ret
+    return ret
+  }
 }
