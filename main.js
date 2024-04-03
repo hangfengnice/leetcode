@@ -1,25 +1,35 @@
-var isValid = function (s) {
-  let map = {
-    ')': '(',
-    ']': '[',
-    '}': '{',
+var minDistance = function (word1, word2) {
+  let n = word1.length
+
+  let m = word2.length
+
+  if (n * m === 0) {
+    return n + m
   }
 
-  let stack = []
+  let D = new Array(n + 1).fill(0).map(() => new Array(m + 1).fill(0))
 
-  for (let ch of s) {
-    debugger
-    let top = stack[stack.length - 1]
+  for (let i = 0; i < n + 1; i++) {
+    D[i][0] = i
+  }
 
-    if (top && map[ch] == top) {
-      stack.pop()
-    } else {
-      stack.push(ch)
+  for (let i = 0; i < m + 1; i++) {
+    D[0][i] = i
+  }
+
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= m; j++) {
+      let left = D[i - 1][j] + 1
+
+      let right = D[i][j - 1] + 1
+
+      let left_down = D[i - 1][j - 1]
+
+      if (word1[i - 1] !== word2[j - 1]) {
+        left_down + 1
+      }
+      D[i][j] = Math.min(left, Math.min(right, left_down))
     }
   }
-
-  console.log(stack, 'stack')
-  return stack.length == 0
+  return D[i][j]
 }
-
-isValid('()')
